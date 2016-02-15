@@ -1,0 +1,65 @@
+package cn.hugeterry.coderfun.views;
+
+import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+
+
+import com.flyco.tablayout.SlidingTabLayout;
+
+import java.util.ArrayList;
+
+import cn.hugeterry.coderfun.R;
+import cn.hugeterry.coderfun.adapter.MyPagerAdapter;
+import cn.hugeterry.coderfun.fragment.DiscoveryFragement;
+import cn.hugeterry.coderfun.utils.ViewFindUtils;
+
+/**
+ * Created by hugeterry(http://hugeterry.cn)
+ * Date: 16/2/9 02:48
+ */
+
+public class MainActivity extends AppCompatActivity {
+
+    private View decorView;
+    private ViewPager vp;
+    private ArrayList<Fragment> mFragments;
+    private final String[] mTitles = {
+            "发现", "Android", "妹纸"};
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        initFragments();
+        initDecorView();
+        initViewPager();
+        initTabLayout();
+
+    }
+
+    private void initFragments() {
+        mFragments = new ArrayList<>();
+        for (String title : mTitles) {
+            mFragments.add(DiscoveryFragement.getInstance(title));
+        }
+    }
+
+    private void initDecorView() {
+        decorView = getWindow().getDecorView();
+    }
+
+    private void initViewPager() {
+        vp = ViewFindUtils.find(decorView, R.id.vp);
+        vp.setAdapter(new MyPagerAdapter(getSupportFragmentManager(), mFragments, mTitles));
+    }
+
+    private void initTabLayout() {
+        SlidingTabLayout tabLayout = ViewFindUtils.find(decorView, R.id.tl);
+        tabLayout.setViewPager(vp, mTitles);
+    }
+
+}
