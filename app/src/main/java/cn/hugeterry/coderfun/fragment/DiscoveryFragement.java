@@ -37,7 +37,7 @@ public class DiscoveryFragement extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_discovery, null);
+        View v = inflater.inflate(R.layout.fragment_list, null);
         TextView card_title_tv = (TextView) v.findViewById(R.id.card_title_tv);
         card_title_tv.setText(mTitle);
 
