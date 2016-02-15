@@ -38,8 +38,8 @@ public class DiscoveryFragement extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_list, null);
-        TextView card_title_tv = (TextView) v.findViewById(R.id.card_title_tv);
-        card_title_tv.setText(mTitle);
+//        TextView card_title_tv = (TextView) v.findViewById(R.id.card_title_tv);
+//        card_title_tv.setText(mTitle);
 
         CoderfunSingle.getInstance().getDataResults("Android", 3, 1).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<DataResults>() {
