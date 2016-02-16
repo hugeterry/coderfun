@@ -1,13 +1,12 @@
 package cn.hugeterry.coderfun.views;
 
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
-
-
-import com.flyco.tablayout.SlidingTabLayout;
 
 import java.util.ArrayList;
 
@@ -23,17 +22,23 @@ import cn.hugeterry.coderfun.utils.ViewFindUtils;
 
 public class MainActivity extends AppCompatActivity {
 
+    private Toolbar toolbar;
+    private TabLayout tabLayout;
     private View decorView;
     private ViewPager vp;
     private ArrayList<Fragment> mFragments;
     private final String[] mTitles = {
-            "发现", "Android", "妹纸"};
+            "首页", "干货", "妹纸"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        toolbar= (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
+//        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         initFragments();
         initDecorView();
         initViewPager();
@@ -58,8 +63,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initTabLayout() {
-        SlidingTabLayout tabLayout = ViewFindUtils.find(decorView, R.id.tl);
-        tabLayout.setViewPager(vp, mTitles);
+        tabLayout= (TabLayout) findViewById(R.id.tabLayout);
+        tabLayout.setupWithViewPager(vp);
     }
 
 }
