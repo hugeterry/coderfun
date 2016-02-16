@@ -2,6 +2,7 @@ package cn.hugeterry.coderfun.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +23,8 @@ import rx.schedulers.Schedulers;
  * Date: 16/2/9 02:45
  */
 public class DiscoveryFragement extends Fragment {
+    private RecyclerView recyclerview;
+
     private String mTitle;
 
     public static DiscoveryFragement getInstance(String title) {
@@ -38,9 +41,17 @@ public class DiscoveryFragement extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_list, null);
-//        TextView card_title_tv = (TextView) v.findViewById(R.id.card_title_tv);
-//        card_title_tv.setText(mTitle);
+        initRecyclerView(v);
+        loadData();
+        return v;
+    }
 
+    private void initRecyclerView(View v) {
+        recyclerview=(RecyclerView)v.findViewById(R.id.recyclerView);
+
+    }
+
+    private void loadData() {
         CoderfunSingle.getInstance().getDataResults("Android", 3, 1).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<DataResults>() {
                     @Override
@@ -67,8 +78,6 @@ public class DiscoveryFragement extends Fragment {
                         Toast.makeText(getActivity(), "do:" + dataResults.isError(), Toast.LENGTH_SHORT).show();
                     }
                 });
-
-        return v;
     }
 
 
