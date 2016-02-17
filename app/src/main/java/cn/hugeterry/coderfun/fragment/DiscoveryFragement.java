@@ -66,22 +66,8 @@ public class DiscoveryFragement extends Fragment {
         swipyRefreshLayout.setOnRefreshListener(new SwipyRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh(SwipyRefreshLayoutDirection direction) {
-
                 Log.d("MainActivity", "Refresh triggered at "
                         + (direction == SwipyRefreshLayoutDirection.TOP ? "top" : "bottom"));
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        //Hide the refresh after 2sec
-                        getActivity().runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                swipyRefreshLayout.setRefreshing(false);
-                            }
-                        });
-                    }
-                }, 2000);
-
 
                 loadData();
 
@@ -98,7 +84,9 @@ public class DiscoveryFragement extends Fragment {
     }
 
     private void loadData() {
-        CoderfunSingle.getInstance().getDataResults("福利",66, 1).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+        CoderfunSingle.getInstance().getDataResults("福利",45, 1)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<DataResults>() {
                     @Override
                     public void onCompleted() {
@@ -122,6 +110,7 @@ public class DiscoveryFragement extends Fragment {
                     public void onNext(DataResults dataResults) {
                         Log.i("frag", "onNext:" + dataResults.isError());
                         Toast.makeText(getActivity(), "do:" + dataResults.isError(), Toast.LENGTH_SHORT).show();
+                        swipyRefreshLayout.setRefreshing(false);
                         girlyAdapter.getResults().clear();
                         girlyAdapter.getResults().addAll(dataResults.getResults());
                         girlyAdapter.notifyDataSetChanged();
