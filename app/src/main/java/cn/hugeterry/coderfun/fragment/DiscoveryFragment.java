@@ -1,7 +1,6 @@
 package cn.hugeterry.coderfun.fragment;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -22,35 +21,41 @@ import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-
 /**
  * Created by hugeterry(http://hugeterry.cn)
  * Date: 16/2/9 02:45
  */
-public class DiscoveryFragement extends Fragment {
+public class DiscoveryFragment extends Fragment {
     private SwipyRefreshLayout swipyRefreshLayout;
     private RecyclerView recyclerview;
     private GirlyAdapter girlyAdapter;
 
+    private static final String ARG_TITLE = "title";
     private String mTitle;
 
-    public static DiscoveryFragement getInstance(String title) {
-        DiscoveryFragement sf = new DiscoveryFragement();
-        sf.mTitle = title;
-        return sf;
+    public static DiscoveryFragment getInstance(String title) {
+        DiscoveryFragment fra = new DiscoveryFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString(ARG_TITLE, title);
+        fra.setArguments(bundle);
+        return fra;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Bundle bundle = getArguments();
+        mTitle = bundle.getString(ARG_TITLE);
+        Toast.makeText(getActivity(), mTitle, Toast.LENGTH_SHORT).show();
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_list, null);
+        View v = inflater.inflate(R.layout.fragment_girly_list, container, false);
         initRecyclerView(v);
         initSwipyRefreshLayout(v);
-//        loadData();
+        loadData("福利", 45, 1);
         return v;
     }
 
@@ -68,8 +73,7 @@ public class DiscoveryFragement extends Fragment {
             public void onRefresh(SwipyRefreshLayoutDirection direction) {
                 Log.d("MainActivity", "Refresh triggered at "
                         + (direction == SwipyRefreshLayoutDirection.TOP ? "top" : "bottom"));
-
-                loadData();
+                loadData("福利", 45, 1);
 
             }
         });
@@ -83,40 +87,33 @@ public class DiscoveryFragement extends Fragment {
         recyclerview.setAdapter(girlyAdapter);
     }
 
-    private void loadData() {
-        CoderfunSingle.getInstance().getDataResults("福利",45, 1)
+    private void loadData(String type, int number, int page) {
+        swipyRefreshLayout.setRefreshing(true);
+        CoderfunSingle.getInstance().getDataResults(type, number, page)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<DataResults>() {
                     @Override
                     public void onCompleted() {
-                        Log.i("zhk-MainActivity", "onCompleted: ");
-                        Toast.makeText(getActivity(),
-                                "Completed",
-                                Toast.LENGTH_SHORT)
-                                .show();
+                        Log.i("frag", "onCompleted: ");
                     }
-
                     @Override
                     public void onError(Throwable e) {
-                        Log.e("frag", "onError: ", e);
-                        Toast.makeText(getActivity(),
-                                "Error:" + e.getMessage(),
-                                Toast.LENGTH_SHORT)
-                                .show();
+                        Log.e("frag", "onError: " + e.getMessage(), e);
+                        Toast.makeText(getActivity(), "网络不顺畅嘞", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void onNext(DataResults dataResults) {
-                        Log.i("frag", "onNext:" + dataResults.isError());
-                        Toast.makeText(getActivity(), "do:" + dataResults.isError(), Toast.LENGTH_SHORT).show();
-                        swipyRefreshLayout.setRefreshing(false);
-                        girlyAdapter.getResults().clear();
-                        girlyAdapter.getResults().addAll(dataResults.getResults());
-                        girlyAdapter.notifyDataSetChanged();
+//                        switch (mTitle) {
+//                            case "妹纸":
+                                swipyRefreshLayout.setRefreshing(false);
+                                girlyAdapter.getResults().clear();
+                                girlyAdapter.getResults().addAll(dataResults.getResults());
+                                girlyAdapter.notifyDataSetChanged();
+//                                break;
+//                        }
                     }
                 });
     }
-
-
 }

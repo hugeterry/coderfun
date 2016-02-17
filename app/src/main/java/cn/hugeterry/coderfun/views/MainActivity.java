@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 import cn.hugeterry.coderfun.R;
 import cn.hugeterry.coderfun.adapter.MyPagerAdapter;
-import cn.hugeterry.coderfun.fragment.DiscoveryFragement;
+import cn.hugeterry.coderfun.fragment.DiscoveryFragment;
 import cn.hugeterry.coderfun.utils.ViewFindUtils;
 
 /**
@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
     private void initFragments() {
         mFragments = new ArrayList<>();
         for (String title : mTitles) {
-            mFragments.add(DiscoveryFragement.getInstance(title));
+            mFragments.add(DiscoveryFragment.getInstance(title));
         }
     }
 
@@ -60,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void initViewPager() {
         vp = ViewFindUtils.find(decorView, R.id.vp);
+        vp.setOffscreenPageLimit(3);
         vp.setAdapter(new MyPagerAdapter(getSupportFragmentManager(), mFragments, mTitles));
     }
 
