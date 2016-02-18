@@ -24,12 +24,4 @@ public class CoderfunSingle{
         return CoderfunAPISingleton;
     }
 
-    public Observable<DataResults> getDataResults(String type,int number,int page){
-        return CoderfunAPISingleton.getDataResults(type,number,page);
-    }
-
-    public Observable<DayResults> getDayResults(int year,int month,int day) {
-        return CoderfunAPISingleton.getDayResults(year,month,day);
-    }
-
 }
