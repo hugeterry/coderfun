@@ -2,8 +2,10 @@ package cn.hugeterry.coderfun.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.support.v7.widget.SwitchCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,9 +15,14 @@ import android.widget.Toast;
 import com.orangegangsters.github.swipyrefreshlayout.library.SwipyRefreshLayout;
 import com.orangegangsters.github.swipyrefreshlayout.library.SwipyRefreshLayoutDirection;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import cn.hugeterry.coderfun.R;
 import cn.hugeterry.coderfun.adapter.GirlyAdapter;
+import cn.hugeterry.coderfun.adapter.RealAdapter;
 import cn.hugeterry.coderfun.beans.DataResults;
+import cn.hugeterry.coderfun.beans.Results;
 import cn.hugeterry.coderfun.retrofit.CoderfunSingle;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
@@ -29,9 +36,13 @@ public class DiscoveryFragment extends Fragment {
     private SwipyRefreshLayout swipyRefreshLayout;
     private RecyclerView recyclerview;
     private GirlyAdapter girlyAdapter;
+    private RealAdapter realAdapter;
 
     private static final String ARG_TITLE = "title";
     private String mTitle;
+
+    private List<Results> ganhuo_list;
+    private List<List<Results>> ganhuo_real_list = new ArrayList<>();
 
     public static DiscoveryFragment getInstance(String title) {
         DiscoveryFragment fra = new DiscoveryFragment();
@@ -55,7 +66,19 @@ public class DiscoveryFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_girly_list, container, false);
         initRecyclerView(v);
         initSwipyRefreshLayout(v);
-        loadData("福利", 45, 1);
+        switch (mTitle) {
+            case "妹纸":
+                loadData("福利", 45, 1);
+                break;
+            case "干货":
+                loadData("Android", 3, 1);
+                loadData("iOS", 3, 1);
+                loadData("前端", 3, 1);
+                loadData("拓展资源", 3, 1);
+                break;
+        }
+
+
         return v;
     }
 
@@ -82,9 +105,21 @@ public class DiscoveryFragment extends Fragment {
 
     private void initRecyclerView(View v) {
         recyclerview = (RecyclerView) v.findViewById(R.id.recyclerView);
-        recyclerview.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
-        girlyAdapter = new GirlyAdapter(getActivity(), null);
-        recyclerview.setAdapter(girlyAdapter);
+        switch (mTitle) {
+
+            case "干货":
+                recyclerview.setLayoutManager(new LinearLayoutManager(recyclerview.getContext()));
+                realAdapter = new RealAdapter(getActivity(), null);
+                recyclerview.setAdapter(realAdapter);
+                break;
+//            case "妹纸":
+            default:
+                recyclerview.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
+                girlyAdapter = new GirlyAdapter(getActivity(), null);
+                recyclerview.setAdapter(girlyAdapter);
+                break;
+        }
+
     }
 
     private void loadData(String type, int number, int page) {
@@ -97,6 +132,7 @@ public class DiscoveryFragment extends Fragment {
                     public void onCompleted() {
                         Log.i("frag", "onCompleted: ");
                     }
+
                     @Override
                     public void onError(Throwable e) {
                         Log.e("frag", "onError: " + e.getMessage(), e);
@@ -105,14 +141,23 @@ public class DiscoveryFragment extends Fragment {
 
                     @Override
                     public void onNext(DataResults dataResults) {
-//                        switch (mTitle) {
-//                            case "妹纸":
+                        switch (mTitle) {
+                            case "妹纸":
                                 swipyRefreshLayout.setRefreshing(false);
                                 girlyAdapter.getResults().clear();
                                 girlyAdapter.getResults().addAll(dataResults.getResults());
                                 girlyAdapter.notifyDataSetChanged();
-//                                break;
-//                        }
+                                break;
+                            case "干货":
+                                ganhuo_list = new ArrayList<>();
+                                ganhuo_list.addAll(dataResults.getResults());
+                                ganhuo_real_list.add(ganhuo_list);
+                                realAdapter.getRealResults().clear();
+                                realAdapter.getRealResults().addAll(ganhuo_real_list);
+                                realAdapter.notifyDataSetChanged();
+//                                System.out.println("ddddddddddddddd_resultTo:" + ganhuo_real_list.size());
+                                break;
+                        }
                     }
                 });
     }
