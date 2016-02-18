@@ -20,16 +20,17 @@ import cn.hugeterry.coderfun.beans.Results;
 public class RealAdapter extends RecyclerView.Adapter<RealAdapter.RealViewHolder> {
 
     private Context context;
-    private List<Results> list = new ArrayList<>();
+    //    private List<Results> list = new ArrayList<>();
+    private List<List<Results>> real_list = new ArrayList<>();
 
-    private List<Results> getResults() {
-        return list;
+    public List<List<Results>> getRealResults() {
+        return real_list;
     }
 
-    public RealAdapter(Context context, List<Results> list) {
+    public RealAdapter(Context context, List<List<Results>> real_list) {
         this.context = context;
-        if (list != null) {
-            this.list = list;
+        if (real_list != null) {
+            this.real_list = real_list;
         }
     }
 
@@ -42,14 +43,31 @@ public class RealAdapter extends RecyclerView.Adapter<RealAdapter.RealViewHolder
 
     @Override
     public void onBindViewHolder(RealViewHolder holder, int position) {
-        holder.title.setText(list.get(position).getType());
-        holder.t01.setText(list.get(position).getDesc());
+        String type = real_list.get(position).get(0).getType();
+        holder.title.setText(type);
+        switch (type) {
+            case "Android":
+                holder.title_kid.setText("探索更多Android干货");
+                break;
+            case "iOS":
+                holder.title_kid.setText("学习更多iOS干货");
+                break;
+            case "前端":
+                holder.title_kid.setText("挖掘更多前端干货");
+                break;
+            case "拓展资源":
+                holder.title_kid.setText("发现更多拓展资源");
+                break;
+        }
+        holder.t01.setText(real_list.get(position).get(0).getDesc());
+        holder.t02.setText(real_list.get(position).get(1).getDesc());
+        holder.t03.setText(real_list.get(position).get(2).getDesc());
 
     }
 
     @Override
     public int getItemCount() {
-        return list.size();
+        return real_list.size();
     }
 
     class RealViewHolder extends RecyclerView.ViewHolder {
