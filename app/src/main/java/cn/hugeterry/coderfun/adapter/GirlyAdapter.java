@@ -29,6 +29,7 @@ public class GirlyAdapter extends RecyclerView.Adapter<GirlyAdapter.GirlyViewHol
     public List<Results> getResults() {
         return list;
     }
+
     public GirlyAdapter(Context context, List<Results> list) {
         this.context = context;
         if (list != null) {
@@ -45,10 +46,11 @@ public class GirlyAdapter extends RecyclerView.Adapter<GirlyAdapter.GirlyViewHol
 
     @Override
     public void onBindViewHolder(GirlyViewHolder holder, int position) {
-//        Uri uri = Uri.parse(list.get(position).getUrl());
-//        holder.draweeView.setAspectRatio(2F);
-//        holder.draweeView.setImageURI(uri);
-        Glide.with(context).load(list.get(position).getUrl()).diskCacheStrategy(DiskCacheStrategy.ALL).into(holder.draweeView);
+        Glide.with(context)
+             .load(list.get(position)
+             .getUrl())
+             .diskCacheStrategy(DiskCacheStrategy.ALL)
+             .into(holder.draweeView);
     }
 
     @Override

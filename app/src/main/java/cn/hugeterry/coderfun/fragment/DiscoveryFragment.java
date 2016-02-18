@@ -20,6 +20,7 @@ import java.util.List;
 
 import cn.hugeterry.coderfun.R;
 import cn.hugeterry.coderfun.adapter.GirlyAdapter;
+import cn.hugeterry.coderfun.adapter.PartAdapter;
 import cn.hugeterry.coderfun.adapter.RealAdapter;
 import cn.hugeterry.coderfun.beans.DataResults;
 import cn.hugeterry.coderfun.beans.Results;
@@ -37,6 +38,7 @@ public class DiscoveryFragment extends Fragment {
     private RecyclerView recyclerview;
     private GirlyAdapter girlyAdapter;
     private RealAdapter realAdapter;
+    private PartAdapter partAdapter;
 
     private static final String ARG_TITLE = "title";
     private String mTitle;
@@ -67,14 +69,18 @@ public class DiscoveryFragment extends Fragment {
         initRecyclerView(v);
         initSwipyRefreshLayout(v);
         switch (mTitle) {
-            case "妹纸":
-                loadData("福利", 45, 1);
+            case "首页":
+                loadData("all", 15, 1);
                 break;
             case "干货":
                 loadData("Android", 3, 1);
                 loadData("iOS", 3, 1);
                 loadData("前端", 3, 1);
                 loadData("拓展资源", 3, 1);
+                break;
+//            case "妹纸":
+            default:
+                loadData("福利", 45, 1);
                 break;
         }
 
@@ -106,7 +112,11 @@ public class DiscoveryFragment extends Fragment {
     private void initRecyclerView(View v) {
         recyclerview = (RecyclerView) v.findViewById(R.id.recyclerView);
         switch (mTitle) {
-
+            case "首页":
+                recyclerview.setLayoutManager(new LinearLayoutManager(recyclerview.getContext()));
+                partAdapter = new PartAdapter(getActivity(), null);
+                recyclerview.setAdapter(partAdapter);
+                break;
             case "干货":
                 recyclerview.setLayoutManager(new LinearLayoutManager(recyclerview.getContext()));
                 realAdapter = new RealAdapter(getActivity(), null);
@@ -142,11 +152,11 @@ public class DiscoveryFragment extends Fragment {
                     @Override
                     public void onNext(DataResults dataResults) {
                         switch (mTitle) {
-                            case "妹纸":
+                            case "首页":
                                 swipyRefreshLayout.setRefreshing(false);
-                                girlyAdapter.getResults().clear();
-                                girlyAdapter.getResults().addAll(dataResults.getResults());
-                                girlyAdapter.notifyDataSetChanged();
+                                partAdapter.getResults().clear();
+                                partAdapter.getResults().addAll(dataResults.getResults());
+                                partAdapter.notifyDataSetChanged();
                                 break;
                             case "干货":
                                 ganhuo_list = new ArrayList<>();
@@ -155,7 +165,13 @@ public class DiscoveryFragment extends Fragment {
                                 realAdapter.getRealResults().clear();
                                 realAdapter.getRealResults().addAll(ganhuo_real_list);
                                 realAdapter.notifyDataSetChanged();
-//                                System.out.println("ddddddddddddddd_resultTo:" + ganhuo_real_list.size());
+                                break;
+//                            case "妹纸":
+                            default:
+                                swipyRefreshLayout.setRefreshing(false);
+                                girlyAdapter.getResults().clear();
+                                girlyAdapter.getResults().addAll(dataResults.getResults());
+                                girlyAdapter.notifyDataSetChanged();
                                 break;
                         }
                     }
