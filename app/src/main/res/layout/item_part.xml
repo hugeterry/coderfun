@@ -4,9 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="#ffffff"
-    android:paddingBottom="20dp">
+    android:orientation="vertical">
 
     <WebView
         android:id="@+id/part_wv"
@@ -21,9 +20,16 @@
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:paddingBottom="10dp"
-        fresco:placeholderImage="@mipmap/ic_launcher"
-        android:visibility="gone" />
-
+        android:paddingTop="10dp"
+        android:visibility="gone"
+        fresco:placeholderImage="@mipmap/ic_launcher" />
+    <!-- <ImageView
+         android:id="@+id/part_iv"
+         android:layout_width="match_parent"
+         android:layout_height="150dp"
+         android:paddingTop="10dp"
+         android:paddingBottom="10dp"
+         android:visibility="gone" />-->
     <TextView
         android:id="@+id/part_tv"
         android:layout_width="match_parent"
@@ -62,9 +68,10 @@
             tools:text="Android"
             tools:textColor="@color/colorAccent" />
     </RelativeLayout>
+
     <ImageView
-        android:paddingTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#6e6e6e" />
+        android:layout_marginTop="10dp"
+        android:background="#a7a7a7" />
 </LinearLayout>
