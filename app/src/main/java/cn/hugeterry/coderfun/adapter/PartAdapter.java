@@ -11,9 +11,10 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageView;
-import android.widget.Switch;
+
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.ArrayList;
@@ -52,25 +53,31 @@ public class PartAdapter extends RecyclerView.Adapter<PartAdapter.PartViewHolder
     @Override
     public void onBindViewHolder(PartViewHolder holder, int position) {
         String type = list.get(position).getType();
-        switch (type) {
-            case "休息视频":
-                holder.webView.setVisibility(View.VISIBLE);
-                holder.draweeView.setVisibility(View.GONE);
-                holder.textView.setVisibility(View.GONE);
-                initWebview(holder.webView);
-                holder.webView.loadUrl(list.get(position).getUrl());
-                break;
-            case "福利":
-                holder.webView.setVisibility(View.GONE);
-                holder.draweeView.setVisibility(View.VISIBLE);
-                holder.textView.setVisibility(View.GONE);
-
-                Uri uri = Uri.parse(list.get(position).getUrl());
-                holder.draweeView.setImageURI(uri);
-                break;
-            default:
-                holder.textView.setText(list.get(position).getDesc());
-                break;
+//        switch (type) {
+//            case "休息视频":
+//                holder.webView.setVisibility(View.VISIBLE);
+//                holder.imageView.setVisibility(View.GONE);
+//                holder.textView.setVisibility(View.GONE);
+//                initWebview(holder.webView);
+//                holder.webView.loadUrl(list.get(position).getUrl());
+//                break;
+//            case "福利":
+        if (type.equals("福利")) {
+            holder.webView.setVisibility(View.GONE);
+            holder.webView.stopLoading();
+            holder.textView.setVisibility(View.GONE);
+            holder.draweeView.setVisibility(View.VISIBLE);
+            Uri uri = Uri.parse(list.get(position).getUrl());
+            holder.draweeView.setImageURI(uri);
+//            break;
+//            default:
+        } else {
+            holder.webView.setVisibility(View.GONE);
+            holder.webView.stopLoading();
+            holder.draweeView.setVisibility(View.GONE);
+            holder.textView.setVisibility(View.VISIBLE);
+            holder.textView.setText(list.get(position).getDesc());
+//                break;
         }
         holder.tv_author.setText(list.get(position).getWho());
         holder.tv_time.setText(list.get(position).getPublishedAt());
@@ -90,8 +97,8 @@ public class PartAdapter extends RecyclerView.Adapter<PartAdapter.PartViewHolder
         webView.getSettings().setJavaScriptEnabled(true);
         webView.getSettings().setDomStorageEnabled(true);
         webView.getSettings().setDatabaseEnabled(true);
-//        webView.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
-//        webView.getSettings().setAppCacheEnabled(true);
+        webView.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
+        webView.getSettings().setAppCacheEnabled(true);
     }
 
     class PartViewHolder extends RecyclerView.ViewHolder {
