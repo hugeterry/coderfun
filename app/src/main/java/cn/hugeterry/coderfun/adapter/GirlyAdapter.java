@@ -47,10 +47,9 @@ public class GirlyAdapter extends RecyclerView.Adapter<GirlyAdapter.GirlyViewHol
     @Override
     public void onBindViewHolder(GirlyViewHolder holder, int position) {
         Glide.with(context)
-             .load(list.get(position)
-             .getUrl())
-             .diskCacheStrategy(DiskCacheStrategy.ALL)
-             .into(holder.draweeView);
+                .load(list.get(position).getUrl())
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(holder.imageView);
     }
 
     @Override
@@ -60,11 +59,11 @@ public class GirlyAdapter extends RecyclerView.Adapter<GirlyAdapter.GirlyViewHol
 
 
     class GirlyViewHolder extends RecyclerView.ViewHolder {
-        ImageView draweeView;
+        ImageView imageView;
 
         public GirlyViewHolder(View itemView) {
             super(itemView);
-            draweeView = (ImageView) itemView.findViewById(R.id.iv_girly);
+            imageView = (ImageView) itemView.findViewById(R.id.iv_girly);
         }
     }
 
