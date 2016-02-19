@@ -68,25 +68,28 @@ public class DiscoveryFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_girly_list, container, false);
         initRecyclerView(v);
         initSwipyRefreshLayout(v);
-        switch (mTitle) {
-            case "首页":
-                loadData("all", 15, 1);
-                break;
-            case "干货":
-                loadData("Android", 3, 1);
-                loadData("iOS", 3, 1);
-                loadData("前端", 3, 1);
-                loadData("拓展资源", 3, 1);
-                break;
-//            case "妹纸":
-            default:
-                loadData("福利", 45, 1);
-                break;
-        }
-
+        loadData(mTitle);
 
         return v;
     }
+
+    private void loadData(String mTitle) {
+        switch (mTitle) {
+            case "首页":
+                getDataResults("all", 45, 1);
+                break;
+            case "干货":
+                getDataResults("Android", 3, 1);
+                getDataResults("iOS", 3, 1);
+                getDataResults("前端", 3, 1);
+                getDataResults("拓展资源", 3, 1);
+                break;
+            case "妹纸":
+                getDataResults("福利", 45, 1);
+                break;
+        }
+    }
+
 
     private void initSwipyRefreshLayout(View v) {
         swipyRefreshLayout = (SwipyRefreshLayout) v.findViewById(R.id.swipyrefreshlayout);
@@ -102,7 +105,7 @@ public class DiscoveryFragment extends Fragment {
             public void onRefresh(SwipyRefreshLayoutDirection direction) {
                 Log.d("MainActivity", "Refresh triggered at "
                         + (direction == SwipyRefreshLayoutDirection.TOP ? "top" : "bottom"));
-                loadData("福利", 45, 1);
+                loadData(mTitle);
 
             }
         });
@@ -122,8 +125,7 @@ public class DiscoveryFragment extends Fragment {
                 realAdapter = new RealAdapter(getActivity(), null);
                 recyclerview.setAdapter(realAdapter);
                 break;
-//            case "妹纸":
-            default:
+            case "妹纸":
                 recyclerview.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
                 girlyAdapter = new GirlyAdapter(getActivity(), null);
                 recyclerview.setAdapter(girlyAdapter);
@@ -132,7 +134,7 @@ public class DiscoveryFragment extends Fragment {
 
     }
 
-    private void loadData(String type, int number, int page) {
+    private void getDataResults(String type, int number, int page) {
         swipyRefreshLayout.setRefreshing(true);
         CoderfunSingle.getInstance().getDataResults(type, number, page)
                 .subscribeOn(Schedulers.io())
@@ -151,10 +153,14 @@ public class DiscoveryFragment extends Fragment {
 
                     @Override
                     public void onNext(DataResults dataResults) {
+                        if (dataResults.isError() == true) {
+                            Toast.makeText(getActivity(), "啊擦，服务器出问题啦", Toast.LENGTH_SHORT).show();
+                        }
                         switch (mTitle) {
                             case "首页":
                                 swipyRefreshLayout.setRefreshing(false);
                                 partAdapter.getResults().clear();
+                                dataResults.getResults().removeAll(partAdapter.getResults());
                                 partAdapter.getResults().addAll(dataResults.getResults());
                                 partAdapter.notifyDataSetChanged();
                                 break;
@@ -163,13 +169,14 @@ public class DiscoveryFragment extends Fragment {
                                 ganhuo_list.addAll(dataResults.getResults());
                                 ganhuo_real_list.add(ganhuo_list);
                                 realAdapter.getRealResults().clear();
+                                dataResults.getResults().removeAll(realAdapter.getRealResults());
                                 realAdapter.getRealResults().addAll(ganhuo_real_list);
                                 realAdapter.notifyDataSetChanged();
                                 break;
-//                            case "妹纸":
-                            default:
+                            case "妹纸":
                                 swipyRefreshLayout.setRefreshing(false);
                                 girlyAdapter.getResults().clear();
+                                dataResults.getResults().removeAll(girlyAdapter.getResults());
                                 girlyAdapter.getResults().addAll(dataResults.getResults());
                                 girlyAdapter.notifyDataSetChanged();
                                 break;
