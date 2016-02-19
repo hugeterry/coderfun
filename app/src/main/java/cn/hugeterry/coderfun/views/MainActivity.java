@@ -29,8 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private View decorView;
     private ViewPager vp;
     private ArrayList<Fragment> mFragments;
-    private final String[] mTitles = {
-            "首页", "干货", "妹纸"};
+    private final String[] mTitles = {"首页", "干货", "妹纸"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
