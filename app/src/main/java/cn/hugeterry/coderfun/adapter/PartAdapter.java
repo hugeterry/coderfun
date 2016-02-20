@@ -15,14 +15,13 @@ import android.widget.ImageView;
 
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import cn.hugeterry.coderfun.R;
-import cn.hugeterry.coderfun.beans.Results;
+import cn.hugeterry.coderfun.model.beans.Results;
 
 /**
  * Created by hugeterry(http://hugeterry.cn)
@@ -31,16 +30,16 @@ import cn.hugeterry.coderfun.beans.Results;
 public class PartAdapter extends RecyclerView.Adapter<PartAdapter.PartViewHolder> {
 
     private Context context;
-    private List<Results> list = new ArrayList<>();
+    private List<Results> part_list = new ArrayList<>();
 
     public List<Results> getResults() {
-        return list;
+        return part_list;
     }
 
-    public PartAdapter(Context context, List<Results> list) {
+    public PartAdapter(Context context, List<Results> part_list) {
         this.context = context;
-        if (list != null) {
-            this.list = list;
+        if (part_list != null) {
+            this.part_list = part_list;
         }
     }
 
@@ -53,15 +52,15 @@ public class PartAdapter extends RecyclerView.Adapter<PartAdapter.PartViewHolder
 
     @Override
     public void onBindViewHolder(PartViewHolder holder, int position) {
-        String type = list.get(position).getType();
+        String type = part_list.get(position).getType();
         switch (type) {
             case "休息视频":
                 holder.iv_video.setVisibility(View.VISIBLE);
                 holder.tv_time.setVisibility(View.GONE);
                 holder.tv_author.setText("看看视频，休息一下吧......");
                 holder.tv_author.setTextColor(Color.parseColor("#41b94d"));
-                holder.textView.setText(list.get(position).getDesc());
-                holder.tv_time.setText(list.get(position).getPublishedAt());
+                holder.textView.setText(part_list.get(position).getDesc());
+                holder.tv_time.setText(part_list.get(position).getPublishedAt());
 //                initWebview(holder.webView);
 //                holder.webView.loadUrl(list.get(position).getUrl());
                 break;
@@ -72,7 +71,7 @@ public class PartAdapter extends RecyclerView.Adapter<PartAdapter.PartViewHolder
                 holder.tv_time.setVisibility(View.GONE);
                 holder.tv_author.setText("瞧瞧妹纸，扩展扩展视野......");
                 holder.tv_author.setTextColor(Color.parseColor("#ffff4444"));
-                Uri uri = Uri.parse(list.get(position).getUrl());
+                Uri uri = Uri.parse(part_list.get(position).getUrl());
                 holder.draweeView.setImageURI(uri);
                 break;
             default:
@@ -80,21 +79,21 @@ public class PartAdapter extends RecyclerView.Adapter<PartAdapter.PartViewHolder
                 holder.iv_video.setVisibility(View.GONE);
                 holder.textView.setVisibility(View.VISIBLE);
                 holder.tv_time.setVisibility(View.VISIBLE);
-                holder.tv_author.setText(list.get(position).getWho());
+                holder.tv_author.setText(part_list.get(position).getWho());
                 holder.tv_author.setTextColor(Color.parseColor("#87000000"));
-                holder.tv_time.setText(list.get(position).getPublishedAt());
-                holder.textView.setText(list.get(position).getDesc());
+                holder.tv_time.setText(part_list.get(position).getPublishedAt());
+                holder.textView.setText(part_list.get(position).getDesc());
                 break;
         }
 
-        holder.tv_time.setText(list.get(position).getPublishedAt());
+        holder.tv_time.setText(part_list.get(position).getPublishedAt());
         holder.tv_type.setText(type);
 
     }
 
     @Override
     public int getItemCount() {
-        return list.size();
+        return part_list.size();
     }
 
     private void initWebview(WebView webView) {

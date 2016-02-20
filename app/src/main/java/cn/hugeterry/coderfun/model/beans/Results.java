@@ -1,4 +1,4 @@
-package cn.hugeterry.coderfun.beans;
+package cn.hugeterry.coderfun.model.beans;
 
 /**
  * Created by hugeterry(http://hugeterry.cn)

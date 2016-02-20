@@ -15,7 +15,7 @@ import java.util.List;
 
 import cn.hugeterry.coderfun.R;
 
-import cn.hugeterry.coderfun.beans.Results;
+import cn.hugeterry.coderfun.model.beans.Results;
 
 /**
  * Created by hugeterry(http://hugeterry.cn)
@@ -24,16 +24,16 @@ import cn.hugeterry.coderfun.beans.Results;
 public class GirlyAdapter extends RecyclerView.Adapter<GirlyAdapter.GirlyViewHolder> {
 
     private Context context;
-    private List<Results> list = new ArrayList<>();
+    private List<Results> girly_list = new ArrayList<>();
 
     public List<Results> getResults() {
-        return list;
+        return girly_list;
     }
 
-    public GirlyAdapter(Context context, List<Results> list) {
+    public GirlyAdapter(Context context, List<Results> girly_list) {
         this.context = context;
-        if (list != null) {
-            this.list = list;
+        if (girly_list != null) {
+            this.girly_list = girly_list;
         }
     }
 
@@ -47,14 +47,14 @@ public class GirlyAdapter extends RecyclerView.Adapter<GirlyAdapter.GirlyViewHol
     @Override
     public void onBindViewHolder(GirlyViewHolder holder, int position) {
         Glide.with(context)
-                .load(list.get(position).getUrl())
+                .load(girly_list.get(position).getUrl())
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(holder.imageView);
     }
 
     @Override
     public int getItemCount() {
-        return list.size();
+        return girly_list.size();
     }
 
 

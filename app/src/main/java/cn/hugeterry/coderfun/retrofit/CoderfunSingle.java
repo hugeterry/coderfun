@@ -1,9 +1,7 @@
 package cn.hugeterry.coderfun.retrofit;
 
-import cn.hugeterry.coderfun.beans.DataResults;
-import cn.hugeterry.coderfun.beans.DayResults;
-import retrofit.http.Path;
-import rx.Observable;
+import cn.hugeterry.coderfun.model.beans.DataResults;
+import cn.hugeterry.coderfun.model.beans.DayResults;
 
 /**
  * Created by hugeterry(http://hugeterry.cn)

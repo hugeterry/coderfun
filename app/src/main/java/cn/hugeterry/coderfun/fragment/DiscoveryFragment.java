@@ -5,7 +5,6 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.support.v7.widget.SwitchCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,8 +21,8 @@ import cn.hugeterry.coderfun.R;
 import cn.hugeterry.coderfun.adapter.GirlyAdapter;
 import cn.hugeterry.coderfun.adapter.PartAdapter;
 import cn.hugeterry.coderfun.adapter.RealAdapter;
-import cn.hugeterry.coderfun.beans.DataResults;
-import cn.hugeterry.coderfun.beans.Results;
+import cn.hugeterry.coderfun.model.beans.DataResults;
+import cn.hugeterry.coderfun.model.beans.Results;
 import cn.hugeterry.coderfun.retrofit.CoderfunSingle;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
@@ -68,10 +67,17 @@ public class DiscoveryFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_girly_list, container, false);
         initRecyclerView(v);
         initSwipyRefreshLayout(v);
-        loadData(mTitle);
+
 
         return v;
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        loadData(mTitle);
+    }
+
 
     private void loadData(String mTitle) {
         switch (mTitle) {

@@ -1,4 +1,4 @@
-package cn.hugeterry.coderfun.beans;
+package cn.hugeterry.coderfun.model.beans;
 
 import java.util.List;
 

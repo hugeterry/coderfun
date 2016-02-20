@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cn.hugeterry.coderfun.R;
-import cn.hugeterry.coderfun.beans.Results;
+import cn.hugeterry.coderfun.model.beans.Results;
 
 /**
  * Created by hugeterry(http://hugeterry.cn)
@@ -20,7 +20,6 @@ import cn.hugeterry.coderfun.beans.Results;
 public class RealAdapter extends RecyclerView.Adapter<RealAdapter.RealViewHolder> {
 
     private Context context;
-    //    private List<Results> list = new ArrayList<>();
     private List<List<Results>> real_list = new ArrayList<>();
 
     public List<List<Results>> getRealResults() {
