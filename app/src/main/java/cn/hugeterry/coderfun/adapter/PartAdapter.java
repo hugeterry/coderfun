@@ -1,6 +1,7 @@
 package cn.hugeterry.coderfun.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -53,33 +54,39 @@ public class PartAdapter extends RecyclerView.Adapter<PartAdapter.PartViewHolder
     @Override
     public void onBindViewHolder(PartViewHolder holder, int position) {
         String type = list.get(position).getType();
-//        switch (type) {
-//            case "休息视频":
-//                holder.webView.setVisibility(View.VISIBLE);
-//                holder.imageView.setVisibility(View.GONE);
-//                holder.textView.setVisibility(View.GONE);
+        switch (type) {
+            case "休息视频":
+                holder.iv_video.setVisibility(View.VISIBLE);
+                holder.tv_time.setVisibility(View.GONE);
+                holder.tv_author.setText("看看视频，休息一下吧......");
+                holder.tv_author.setTextColor(Color.parseColor("#41b94d"));
+                holder.textView.setText(list.get(position).getDesc());
+                holder.tv_time.setText(list.get(position).getPublishedAt());
 //                initWebview(holder.webView);
 //                holder.webView.loadUrl(list.get(position).getUrl());
-//                break;
-//            case "福利":
-        if (type.equals("福利")) {
-            holder.webView.setVisibility(View.GONE);
-            holder.webView.stopLoading();
-            holder.textView.setVisibility(View.GONE);
-            holder.draweeView.setVisibility(View.VISIBLE);
-            Uri uri = Uri.parse(list.get(position).getUrl());
-            holder.draweeView.setImageURI(uri);
-//            break;
-//            default:
-        } else {
-            holder.webView.setVisibility(View.GONE);
-            holder.webView.stopLoading();
-            holder.draweeView.setVisibility(View.GONE);
-            holder.textView.setVisibility(View.VISIBLE);
-            holder.textView.setText(list.get(position).getDesc());
-//                break;
+                break;
+            case "福利":
+                holder.draweeView.setVisibility(View.VISIBLE);
+                holder.iv_video.setVisibility(View.GONE);
+                holder.textView.setVisibility(View.GONE);
+                holder.tv_time.setVisibility(View.GONE);
+                holder.tv_author.setText("瞧瞧妹纸，扩展扩展视野......");
+                holder.tv_author.setTextColor(Color.parseColor("#ffff4444"));
+                Uri uri = Uri.parse(list.get(position).getUrl());
+                holder.draweeView.setImageURI(uri);
+                break;
+            default:
+                holder.draweeView.setVisibility(View.GONE);
+                holder.iv_video.setVisibility(View.GONE);
+                holder.textView.setVisibility(View.VISIBLE);
+                holder.tv_time.setVisibility(View.VISIBLE);
+                holder.tv_author.setText(list.get(position).getWho());
+                holder.tv_author.setTextColor(Color.parseColor("#87000000"));
+                holder.tv_time.setText(list.get(position).getPublishedAt());
+                holder.textView.setText(list.get(position).getDesc());
+                break;
         }
-        holder.tv_author.setText(list.get(position).getWho());
+
         holder.tv_time.setText(list.get(position).getPublishedAt());
         holder.tv_type.setText(type);
 
@@ -102,15 +109,15 @@ public class PartAdapter extends RecyclerView.Adapter<PartAdapter.PartViewHolder
     }
 
     class PartViewHolder extends RecyclerView.ViewHolder {
-        WebView webView;
         SimpleDraweeView draweeView;
+        ImageView iv_video;
         TextView textView;
         TextView tv_author, tv_time, tv_type;
 
         public PartViewHolder(View itemView) {
             super(itemView);
-            webView = (WebView) itemView.findViewById(R.id.part_wv);
             draweeView = (SimpleDraweeView) itemView.findViewById(R.id.part_iv);
+            iv_video=(ImageView)itemView.findViewById(R.id.part_video_iv);
             textView = (TextView) itemView.findViewById(R.id.part_tv);
             tv_author = (TextView) itemView.findViewById(R.id.part_tv_author);
             tv_time = (TextView) itemView.findViewById(R.id.part_tv_time);
