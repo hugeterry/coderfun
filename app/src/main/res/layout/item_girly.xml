@@ -11,7 +11,8 @@
         android:id="@+id/iv_girly"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:minHeight="200dp"
         android:adjustViewBounds="true"
-        android:scaleType="fitXY" />
+        android:scaleType="fitCenter" />
 
 </LinearLayout>
