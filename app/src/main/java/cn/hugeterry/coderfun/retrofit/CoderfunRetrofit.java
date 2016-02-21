@@ -2,6 +2,7 @@ package cn.hugeterry.coderfun.retrofit;
 
 import com.squareup.okhttp.OkHttpClient;
 
+import cn.hugeterry.coderfun.CoderfunKey;
 import retrofit.GsonConverterFactory;
 import retrofit.Retrofit;
 import retrofit.RxJavaCallAdapterFactory;
@@ -12,12 +13,11 @@ import retrofit.RxJavaCallAdapterFactory;
  * Date: 16/2/15 21:37
  */
 public class CoderfunRetrofit {
-    public static final String API_BASE_URL = "http://gank.avosapps.com/api/";
     private static OkHttpClient httpClient = new OkHttpClient();
 
     private static Retrofit.Builder builder =
             new Retrofit.Builder()
-                    .baseUrl(API_BASE_URL)
+                    .baseUrl(CoderfunKey.API_BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create())
                     .addCallAdapterFactory(RxJavaCallAdapterFactory.create());
 
