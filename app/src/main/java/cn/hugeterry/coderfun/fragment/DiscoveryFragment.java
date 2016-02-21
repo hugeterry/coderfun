@@ -24,6 +24,7 @@ import cn.hugeterry.coderfun.adapter.RealAdapter;
 import cn.hugeterry.coderfun.model.beans.DataResults;
 import cn.hugeterry.coderfun.model.beans.Results;
 import cn.hugeterry.coderfun.retrofit.CoderfunSingle;
+import cn.hugeterry.coderfun.utils.FunDao;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -41,9 +42,12 @@ public class DiscoveryFragment extends Fragment {
 
     private static final String ARG_TITLE = "title";
     private String mTitle;
-
+    private static int FRESH_GANHUO_TIME = 4;
+    private List<Results> part_list = new ArrayList<>();
     private List<Results> ganhuo_list;
     private List<List<Results>> ganhuo_real_list = new ArrayList<>();
+    private List<Results> girly_list = new ArrayList<>();
+
 
     public static DiscoveryFragment getInstance(String title) {
         DiscoveryFragment fra = new DiscoveryFragment();
@@ -68,23 +72,26 @@ public class DiscoveryFragment extends Fragment {
         initRecyclerView(v);
         initSwipyRefreshLayout(v);
 
-
         return v;
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        loadData(mTitle);
+        loadDbData();
+        loadData();
+
     }
 
 
-    private void loadData(String mTitle) {
+    private void loadData() {
         switch (mTitle) {
             case "首页":
                 getDataResults("all", 45, 1);
                 break;
             case "干货":
+                FRESH_GANHUO_TIME = 0;
+                ganhuo_real_list.clear();
                 getDataResults("Android", 3, 1);
                 getDataResults("iOS", 3, 1);
                 getDataResults("前端", 3, 1);
@@ -96,6 +103,25 @@ public class DiscoveryFragment extends Fragment {
         }
     }
 
+    private void loadDbData() {
+        System.out.println("look:" + FRESH_GANHUO_TIME);
+        switch (mTitle) {
+            case "首页":
+                part_list.clear();
+                part_list.addAll(FunDao.getFun_Part());
+                break;
+            case "干货":
+                FRESH_GANHUO_TIME = 4;
+                ganhuo_real_list.clear();
+                ganhuo_real_list.addAll(FunDao.getFun_Real());
+                break;
+            case "妹纸":
+                girly_list.clear();
+                girly_list.addAll(FunDao.getFun_Girly());
+                break;
+        }
+        dealWithDataInRecyclerView(part_list, ganhuo_real_list, girly_list);
+    }
 
     private void initSwipyRefreshLayout(View v) {
         swipyRefreshLayout = (SwipyRefreshLayout) v.findViewById(R.id.swipyrefreshlayout);
@@ -111,7 +137,7 @@ public class DiscoveryFragment extends Fragment {
             public void onRefresh(SwipyRefreshLayoutDirection direction) {
                 Log.d("MainActivity", "Refresh triggered at "
                         + (direction == SwipyRefreshLayoutDirection.TOP ? "top" : "bottom"));
-                loadData(mTitle);
+                loadData();
 
             }
         });
@@ -162,32 +188,58 @@ public class DiscoveryFragment extends Fragment {
                         if (dataResults.isError() == true) {
                             Toast.makeText(getActivity(), "啊擦，服务器出问题啦", Toast.LENGTH_SHORT).show();
                         }
-                        switch (mTitle) {
-                            case "首页":
-                                swipyRefreshLayout.setRefreshing(false);
-                                partAdapter.getResults().clear();
-                                dataResults.getResults().removeAll(partAdapter.getResults());
-                                partAdapter.getResults().addAll(dataResults.getResults());
-                                partAdapter.notifyDataSetChanged();
-                                break;
-                            case "干货":
-                                ganhuo_list = new ArrayList<>();
-                                ganhuo_list.addAll(dataResults.getResults());
-                                ganhuo_real_list.add(ganhuo_list);
-                                realAdapter.getRealResults().clear();
-                                dataResults.getResults().removeAll(realAdapter.getRealResults());
-                                realAdapter.getRealResults().addAll(ganhuo_real_list);
-                                realAdapter.notifyDataSetChanged();
-                                break;
-                            case "妹纸":
-                                swipyRefreshLayout.setRefreshing(false);
-                                girlyAdapter.getResults().clear();
-                                dataResults.getResults().removeAll(girlyAdapter.getResults());
-                                girlyAdapter.getResults().addAll(dataResults.getResults());
-                                girlyAdapter.notifyDataSetChanged();
-                                break;
+                        if (mTitle.equals("干货")) {
+                            swipyRefreshLayout.setRefreshing(false);
+                            ganhuo_list = new ArrayList<>();
+                            ganhuo_list.addAll(dataResults.getResults());
+                            ganhuo_real_list.add(ganhuo_list);
+                            FRESH_GANHUO_TIME++;
                         }
+                        saveDataInDb(dataResults.getResults(), ganhuo_real_list);
+                        dealWithDataInRecyclerView(dataResults.getResults(), ganhuo_real_list, dataResults.getResults());
+
                     }
                 });
+    }
+
+    private void dealWithDataInRecyclerView(List<Results> part_list, List<List<Results>> ganhuo_real_list, List<Results> girly_list) {
+        switch (mTitle) {
+            case "首页":
+                swipyRefreshLayout.setRefreshing(false);
+                partAdapter.getResults().clear();
+                partAdapter.getResults().addAll(part_list);
+                partAdapter.notifyDataSetChanged();
+                break;
+            case "干货":
+                if (FRESH_GANHUO_TIME == 4) {
+                    realAdapter.getRealResults().clear();
+                    realAdapter.getRealResults().addAll(ganhuo_real_list);
+                    realAdapter.notifyDataSetChanged();
+                    ganhuo_real_list.clear();
+                }
+                break;
+            case "妹纸":
+                swipyRefreshLayout.setRefreshing(false);
+                girlyAdapter.getResults().clear();
+                girlyAdapter.getResults().addAll(girly_list);
+                girlyAdapter.notifyDataSetChanged();
+                break;
+        }
+    }
+
+    private void saveDataInDb(List<Results> results, List<List<Results>> ganhuo_real_list) {
+        switch (mTitle) {
+            case "首页":
+                FunDao.addFun_Part(results);
+                break;
+            case "干货":
+                if (FRESH_GANHUO_TIME == 4) {
+                    FunDao.addFun_Real(ganhuo_real_list);
+                }
+                break;
+            case "妹纸":
+                FunDao.addFun_Girly(results);
+                break;
+        }
     }
 }
