@@ -1,6 +1,7 @@
 package cn.hugeterry.coderfun.fragment;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -16,7 +17,9 @@ import com.orangegangsters.github.swipyrefreshlayout.library.SwipyRefreshLayoutD
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
+import cn.hugeterry.coderfun.CoderfunKey;
 import cn.hugeterry.coderfun.R;
 import cn.hugeterry.coderfun.adapter.GirlyAdapter;
 import cn.hugeterry.coderfun.adapter.PartAdapter;
@@ -25,8 +28,14 @@ import cn.hugeterry.coderfun.model.beans.DataResults;
 import cn.hugeterry.coderfun.model.beans.Results;
 import cn.hugeterry.coderfun.retrofit.CoderfunSingle;
 import cn.hugeterry.coderfun.utils.FunDao;
+import cn.hugeterry.coderfun.views.MainActivity;
+import rx.Observable;
 import rx.Subscriber;
+import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action;
+import rx.functions.Action0;
+import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 
 /**
@@ -43,6 +52,13 @@ public class DiscoveryFragment extends Fragment {
     private static final String ARG_TITLE = "title";
     private String mTitle;
     private static int FRESH_GANHUO_TIME = 4;
+    private static int fi_num = CoderfunKey.FI_NUM;
+    private static int gh_num = CoderfunKey.GH_NUM;
+    private static int mz_num = CoderfunKey.MZ_NUM;
+    private static int NOW_PAGE_FI = 1;
+    private static int NOW_PAGE_GH = 1;
+    private static int NOW_PAGE_MZ = 1;
+    private static boolean isTop = true;
     private List<Results> part_list = new ArrayList<>();
     private List<Results> ganhuo_list;
     private List<List<Results>> ganhuo_real_list = new ArrayList<>();
@@ -79,26 +95,40 @@ public class DiscoveryFragment extends Fragment {
     public void onResume() {
         super.onResume();
         loadDbData();
-        loadData();
+        loadData(true);
 
     }
 
 
-    private void loadData() {
+    private void loadData(Boolean isTop) {
+        Observable.timer(2, TimeUnit.SECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Action1<Long>() {
+                    @Override
+                    public void call(Long aLong) {
+                        swipyRefreshLayout.setRefreshing(false);
+                    }
+                });
         switch (mTitle) {
             case "首页":
-                getDataResults("all", 45, 1);
+                if (isTop == true) {
+                    NOW_PAGE_FI = 1;
+                }
+                getDataResults("all", fi_num, NOW_PAGE_FI, isTop);
                 break;
             case "干货":
                 FRESH_GANHUO_TIME = 0;
                 ganhuo_real_list.clear();
-                getDataResults("Android", 3, 1);
-                getDataResults("iOS", 3, 1);
-                getDataResults("前端", 3, 1);
-                getDataResults("拓展资源", 3, 1);
+                getDataResults("Android", gh_num, NOW_PAGE_GH, isTop);
+                getDataResults("iOS", gh_num, NOW_PAGE_GH, isTop);
+                getDataResults("前端", gh_num, NOW_PAGE_GH, isTop);
+                getDataResults("拓展资源", gh_num, NOW_PAGE_GH, isTop);
                 break;
             case "妹纸":
-                getDataResults("福利", 45, 1);
+                if (isTop == true) {
+                    NOW_PAGE_MZ = 1;
+                }
+                getDataResults("福利", mz_num, NOW_PAGE_MZ, isTop);
                 break;
         }
     }
@@ -137,7 +167,7 @@ public class DiscoveryFragment extends Fragment {
             public void onRefresh(SwipyRefreshLayoutDirection direction) {
                 Log.d("MainActivity", "Refresh triggered at "
                         + (direction == SwipyRefreshLayoutDirection.TOP ? "top" : "bottom"));
-                loadData();
+                loadData(direction == SwipyRefreshLayoutDirection.TOP ? true : false);
 
             }
         });
@@ -166,8 +196,7 @@ public class DiscoveryFragment extends Fragment {
 
     }
 
-    private void getDataResults(String type, int number, int page) {
-        swipyRefreshLayout.setRefreshing(true);
+    private void getDataResults(final String type, int number, int page, final boolean isTop) {
         CoderfunSingle.getInstance().getDataResults(type, number, page)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -187,28 +216,41 @@ public class DiscoveryFragment extends Fragment {
                     public void onNext(DataResults dataResults) {
                         if (dataResults.isError() == true) {
                             Toast.makeText(getActivity(), "啊擦，服务器出问题啦", Toast.LENGTH_SHORT).show();
-                        }
-                        if (mTitle.equals("干货")) {
-                            swipyRefreshLayout.setRefreshing(false);
-                            ganhuo_list = new ArrayList<>();
-                            ganhuo_list.addAll(dataResults.getResults());
-                            ganhuo_real_list.add(ganhuo_list);
-                            FRESH_GANHUO_TIME++;
-                        }
-                        saveDataInDb(dataResults.getResults(), ganhuo_real_list);
-                        dealWithDataInRecyclerView(dataResults.getResults(), ganhuo_real_list, dataResults.getResults());
+                        } else {
+                            if (mTitle.equals("干货")) {
+                                ganhuo_list = new ArrayList<>();
+                                ganhuo_list.addAll(dataResults.getResults());
+                                ganhuo_real_list.add(ganhuo_list);
+                                FRESH_GANHUO_TIME++;
+                            }
 
+                            if (isTop == true) {
+                                saveDataInDb(dataResults.getResults(), ganhuo_real_list);
+                                clearAdapterResults();
+                            }
+                            dealWithDataInRecyclerView(dataResults.getResults(), ganhuo_real_list, dataResults.getResults());
+                        }
                     }
                 });
+    }
+
+    private void clearAdapterResults() {
+        switch (mTitle) {
+            case "首页":
+                partAdapter.getResults().clear();
+                break;
+            case "妹纸":
+                girlyAdapter.getResults().clear();
+                break;
+        }
     }
 
     private void dealWithDataInRecyclerView(List<Results> part_list, List<List<Results>> ganhuo_real_list, List<Results> girly_list) {
         switch (mTitle) {
             case "首页":
-                swipyRefreshLayout.setRefreshing(false);
-                partAdapter.getResults().clear();
                 partAdapter.getResults().addAll(part_list);
                 partAdapter.notifyDataSetChanged();
+                NOW_PAGE_FI++;
                 break;
             case "干货":
                 if (FRESH_GANHUO_TIME == 4) {
@@ -219,10 +261,9 @@ public class DiscoveryFragment extends Fragment {
                 }
                 break;
             case "妹纸":
-                swipyRefreshLayout.setRefreshing(false);
-                girlyAdapter.getResults().clear();
                 girlyAdapter.getResults().addAll(girly_list);
                 girlyAdapter.notifyDataSetChanged();
+                NOW_PAGE_MZ++;
                 break;
         }
     }
