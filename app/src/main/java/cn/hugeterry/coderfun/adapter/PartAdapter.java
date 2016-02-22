@@ -1,19 +1,17 @@
 package cn.hugeterry.coderfun.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebChromeClient;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.ImageView;
 
 import android.widget.TextView;
+
 
 import com.facebook.drawee.view.SimpleDraweeView;
 
@@ -21,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cn.hugeterry.coderfun.R;
+import cn.hugeterry.coderfun.activity.WebAcitivity;
 import cn.hugeterry.coderfun.model.beans.Results;
 import cn.hugeterry.coderfun.utils.TimeDifferenceUtils;
 
@@ -52,7 +51,7 @@ public class PartAdapter extends RecyclerView.Adapter<PartAdapter.PartViewHolder
     }
 
     @Override
-    public void onBindViewHolder(PartViewHolder holder, int position) {
+    public void onBindViewHolder(PartViewHolder holder, final int position) {
         String type = part_list.get(position).getType();
         switch (type) {
             case "休息视频":
@@ -62,8 +61,6 @@ public class PartAdapter extends RecyclerView.Adapter<PartAdapter.PartViewHolder
                 holder.tv_author.setTextColor(Color.parseColor("#41b94d"));
                 holder.textView.setText(part_list.get(position).getDesc());
                 holder.tv_time.setText(part_list.get(position).getPublishedAt());
-//                initWebview(holder.webView);
-//                holder.webView.loadUrl(list.get(position).getUrl());
                 break;
             case "福利":
                 holder.draweeView.setVisibility(View.VISIBLE);
@@ -90,7 +87,15 @@ public class PartAdapter extends RecyclerView.Adapter<PartAdapter.PartViewHolder
         holder.tv_time.setText(TimeDifferenceUtils.getTimeDifference(
                 part_list.get(position).getPublishedAt()));
         holder.tv_type.setText(type);
-
+        holder.view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, WebAcitivity.class);
+                intent.putExtra("url", part_list.get(position).getUrl());
+                intent.putExtra("desc", part_list.get(position).getDesc());
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -98,18 +103,8 @@ public class PartAdapter extends RecyclerView.Adapter<PartAdapter.PartViewHolder
         return part_list.size();
     }
 
-    private void initWebview(WebView webView) {
-        webView.setWebChromeClient(new WebChromeClient());
-        webView.setWebViewClient(new WebViewClient());
-        webView.getSettings().setBuiltInZoomControls(true);
-        webView.getSettings().setJavaScriptEnabled(true);
-        webView.getSettings().setDomStorageEnabled(true);
-        webView.getSettings().setDatabaseEnabled(true);
-        webView.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
-        webView.getSettings().setAppCacheEnabled(true);
-    }
-
     class PartViewHolder extends RecyclerView.ViewHolder {
+        View view;
         SimpleDraweeView draweeView;
         ImageView iv_video;
         TextView textView;
@@ -117,8 +112,9 @@ public class PartAdapter extends RecyclerView.Adapter<PartAdapter.PartViewHolder
 
         public PartViewHolder(View itemView) {
             super(itemView);
+            view = itemView;
             draweeView = (SimpleDraweeView) itemView.findViewById(R.id.part_iv);
-            iv_video=(ImageView)itemView.findViewById(R.id.part_video_iv);
+            iv_video = (ImageView) itemView.findViewById(R.id.part_video_iv);
             textView = (TextView) itemView.findViewById(R.id.part_tv);
             tv_author = (TextView) itemView.findViewById(R.id.part_tv_author);
             tv_time = (TextView) itemView.findViewById(R.id.part_tv_time);

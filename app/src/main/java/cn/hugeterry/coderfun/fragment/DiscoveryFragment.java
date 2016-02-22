@@ -1,7 +1,6 @@
 package cn.hugeterry.coderfun.fragment;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -28,13 +27,9 @@ import cn.hugeterry.coderfun.model.beans.DataResults;
 import cn.hugeterry.coderfun.model.beans.Results;
 import cn.hugeterry.coderfun.retrofit.CoderfunSingle;
 import cn.hugeterry.coderfun.utils.FunDao;
-import cn.hugeterry.coderfun.views.MainActivity;
 import rx.Observable;
 import rx.Subscriber;
-import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action;
-import rx.functions.Action0;
 import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 
