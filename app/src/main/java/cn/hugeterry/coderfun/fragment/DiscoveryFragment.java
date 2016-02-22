@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import cn.hugeterry.coderfun.CoderfunCache;
 import cn.hugeterry.coderfun.CoderfunKey;
 import cn.hugeterry.coderfun.R;
 import cn.hugeterry.coderfun.adapter.GirlyAdapter;
@@ -74,7 +75,7 @@ public class DiscoveryFragment extends Fragment {
         Bundle bundle = getArguments();
         mTitle = bundle.getString(ARG_TITLE);
         Toast.makeText(getActivity(), mTitle, Toast.LENGTH_SHORT).show();
-
+        CoderfunCache.isBackFromWeb = false;
     }
 
     @Override
@@ -90,20 +91,13 @@ public class DiscoveryFragment extends Fragment {
     public void onResume() {
         super.onResume();
         loadDbData();
-        loadData(true);
-
+        if (CoderfunCache.isBackFromWeb == false) {
+            loadData(true);
+        }
     }
 
 
     private void loadData(Boolean isTop) {
-        Observable.timer(2, TimeUnit.SECONDS)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<Long>() {
-                    @Override
-                    public void call(Long aLong) {
-                        swipyRefreshLayout.setRefreshing(false);
-                    }
-                });
         switch (mTitle) {
             case "首页":
                 if (isTop == true) {
@@ -162,6 +156,14 @@ public class DiscoveryFragment extends Fragment {
             public void onRefresh(SwipyRefreshLayoutDirection direction) {
                 Log.d("MainActivity", "Refresh triggered at "
                         + (direction == SwipyRefreshLayoutDirection.TOP ? "top" : "bottom"));
+                Observable.timer(2, TimeUnit.SECONDS)
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new Action1<Long>() {
+                            @Override
+                            public void call(Long aLong) {
+                                swipyRefreshLayout.setRefreshing(false);
+                            }
+                        });
                 loadData(direction == SwipyRefreshLayoutDirection.TOP ? true : false);
 
             }

@@ -1,6 +1,7 @@
 package cn.hugeterry.coderfun.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +11,9 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.hugeterry.coderfun.CoderfunKey;
 import cn.hugeterry.coderfun.R;
+import cn.hugeterry.coderfun.activity.WebAcitivity;
 import cn.hugeterry.coderfun.model.beans.Results;
 
 /**
@@ -41,7 +44,7 @@ public class RealAdapter extends RecyclerView.Adapter<RealAdapter.RealViewHolder
     }
 
     @Override
-    public void onBindViewHolder(RealViewHolder holder, int position) {
+    public void onBindViewHolder(RealViewHolder holder, final int position) {
         String type = real_list.get(position).get(0).getType();
         holder.title.setText(type);
         switch (type) {
@@ -58,11 +61,27 @@ public class RealAdapter extends RecyclerView.Adapter<RealAdapter.RealViewHolder
                 holder.title_kid.setText("发现更多拓展资源");
                 break;
         }
-        holder.t01.setText(real_list.get(position).get(0).getDesc());
-        holder.t02.setText(real_list.get(position).get(1).getDesc());
-        holder.t03.setText(real_list.get(position).get(2).getDesc());
+        setupHolderTextView(holder.t01, 0, position);
+        setupHolderTextView(holder.t02, 1, position);
+        setupHolderTextView(holder.t03, 2, position);
 
     }
+
+    private void setupHolderTextView(TextView textView, final int num, final int position) {
+        for (int i = 0; i <= CoderfunKey.GH_NUM; i++) {
+            textView.setText(real_list.get(position).get(num).getDesc());
+            textView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context, WebAcitivity.class);
+                    intent.putExtra("url", real_list.get(position).get(num).getUrl());
+                    intent.putExtra("desc", real_list.get(position).get(num).getDesc());
+                    context.startActivity(intent);
+                }
+            });
+        }
+    }
+
 
     @Override
     public int getItemCount() {

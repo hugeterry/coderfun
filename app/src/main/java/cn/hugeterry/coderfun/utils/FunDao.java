@@ -82,7 +82,6 @@ public class FunDao {
                 result.setWho(realDbBeen.get(k).who);
                 result.setPublishedAt(realDbBeen.get(k).publishedAt);
                 result.setDesc(realDbBeen.get(k).desc);
-                System.out.println(result.getDesc());
                 result.setType(realDbBeen.get(k).type);
                 result.setUrl(realDbBeen.get(k).url);
                 result.setUsed(realDbBeen.get(k).used);
