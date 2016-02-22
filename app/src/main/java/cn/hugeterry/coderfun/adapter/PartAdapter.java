@@ -22,6 +22,7 @@ import java.util.List;
 
 import cn.hugeterry.coderfun.R;
 import cn.hugeterry.coderfun.model.beans.Results;
+import cn.hugeterry.coderfun.utils.TimeDifferenceUtils;
 
 /**
  * Created by hugeterry(http://hugeterry.cn)
@@ -86,7 +87,8 @@ public class PartAdapter extends RecyclerView.Adapter<PartAdapter.PartViewHolder
                 break;
         }
 
-        holder.tv_time.setText(part_list.get(position).getPublishedAt());
+        holder.tv_time.setText(TimeDifferenceUtils.getTimeDifference(
+                part_list.get(position).getPublishedAt()));
         holder.tv_type.setText(type);
 
     }
