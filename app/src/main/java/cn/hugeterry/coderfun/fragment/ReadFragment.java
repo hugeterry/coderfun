@@ -13,7 +13,6 @@ import android.widget.Toast;
 import com.orangegangsters.github.swipyrefreshlayout.library.SwipyRefreshLayout;
 import com.orangegangsters.github.swipyrefreshlayout.library.SwipyRefreshLayoutDirection;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -24,7 +23,6 @@ import cn.hugeterry.coderfun.adapter.ReadAdapter;
 import cn.hugeterry.coderfun.model.beans.DataResults;
 import cn.hugeterry.coderfun.model.beans.Results;
 import cn.hugeterry.coderfun.retrofit.CoderfunSingle;
-import cn.hugeterry.coderfun.utils.FunDao;
 import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
