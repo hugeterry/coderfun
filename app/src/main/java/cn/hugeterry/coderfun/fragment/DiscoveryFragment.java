@@ -54,7 +54,6 @@ public class DiscoveryFragment extends Fragment {
     private static int NOW_PAGE_FI = 1;
     private static int NOW_PAGE_GH = 1;
     private static int NOW_PAGE_MZ = 1;
-    private static boolean isTop = true;
     private List<Results> part_list = new ArrayList<>();
     private List<Results> ganhuo_list;
     private List<List<Results>> ganhuo_real_list = new ArrayList<>();
@@ -74,13 +73,12 @@ public class DiscoveryFragment extends Fragment {
         super.onCreate(savedInstanceState);
         Bundle bundle = getArguments();
         mTitle = bundle.getString(ARG_TITLE);
-        Toast.makeText(getActivity(), mTitle, Toast.LENGTH_SHORT).show();
-        CoderfunCache.isBackFromWeb = false;
+        CoderfunCache.isBackFromWebOrImage = false;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_girly_list, container, false);
+        View v = inflater.inflate(R.layout.fragment_list, container, false);
         initRecyclerView(v);
         initSwipyRefreshLayout(v);
 
@@ -91,7 +89,7 @@ public class DiscoveryFragment extends Fragment {
     public void onResume() {
         super.onResume();
         loadDbData();
-        if (CoderfunCache.isBackFromWeb == false) {
+        if (CoderfunCache.isBackFromWebOrImage == false) {
             loadData(true);
         }
     }

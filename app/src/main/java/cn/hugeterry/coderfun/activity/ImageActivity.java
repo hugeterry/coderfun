@@ -30,7 +30,7 @@ public class ImageActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_image);
-        CoderfunCache.isBackFromWeb = true;
+        CoderfunCache.isBackFromWebOrImage = true;
         url = getIntent().getStringExtra("url");
         desc = getIntent().getStringExtra("desc");
         initToolbar();
@@ -49,7 +49,7 @@ public class ImageActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_arrow_back_white_24dp);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_arrow_white_24dp);
         getSupportActionBar().setTitle("beautiful girls");
     }
 

@@ -5,5 +5,5 @@ package cn.hugeterry.coderfun;
  * Date: 16/2/23 02:02
  */
 public class CoderfunCache {
-    public static boolean isBackFromWeb = false;
+    public static boolean isBackFromWebOrImage = false;
 }

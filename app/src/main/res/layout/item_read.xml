@@ -3,27 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffffff"
-    android:orientation="vertical">
+    android:background="?attr/selectableItemBackground"
+    android:orientation="vertical"
+    tools:background="#ffffffff">
 
-    <WebView
-        android:id="@+id/part_wv"
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:paddingBottom="10dp"
-        android:visibility="gone"
-        tools:visibility="visible" />
-
-
-    <!-- <ImageView
-         android:id="@+id/part_iv"
-         android:layout_width="match_parent"
-         android:layout_height="150dp"
-         android:paddingTop="10dp"
-         android:paddingBottom="10dp"
-         android:visibility="gone" />-->
     <TextView
-        android:id="@+id/part_tv"
+        android:id="@+id/read_tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="10dp"
@@ -38,27 +23,19 @@
         android:paddingRight="10dp">
 
         <TextView
-            android:id="@+id/part_tv_author"
+            android:id="@+id/read_tv_author"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             tools:text="HugeTerry" />
 
         <TextView
-            android:id="@+id/part_tv_time"
+            android:id="@+id/read_tv_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/part_tv_author"
+            android:layout_toRightOf="@id/read_tv_author"
             android:paddingLeft="15dp"
             tools:text="02:46" />
-
-        <TextView
-            android:id="@+id/part_tv_type"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            tools:text="Android"
-            tools:textColor="@color/colorAccent" />
     </RelativeLayout>
 
     <ImageView

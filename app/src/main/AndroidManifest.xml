@@ -24,6 +24,9 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".activity.ReadActivity"
+            android:theme="@style/AppTheme" />
+        <activity
             android:name=".activity.WebAcitivity"
             android:theme="@style/AppTheme" />
         <activity

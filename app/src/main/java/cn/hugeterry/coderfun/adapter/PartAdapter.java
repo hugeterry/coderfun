@@ -61,7 +61,6 @@ public class PartAdapter extends RecyclerView.Adapter<PartAdapter.PartViewHolder
                 holder.tv_author.setText("看看视频，休息一下吧......");
                 holder.tv_author.setTextColor(Color.parseColor("#41b94d"));
                 holder.textView.setText(part_list.get(position).getDesc());
-                holder.tv_time.setText(part_list.get(position).getPublishedAt());
                 holder.view.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
