@@ -14,7 +14,7 @@
         android:allowBackup="true"
         android:icon="@mipmap/coderfun_icon"
         android:label="@string/app_name"
-        android:supportsRtl="true"
+        android:largeHeap="true"
         android:theme="@style/AppTheme">
         <activity android:name=".activity.MainActivity">
             <intent-filter>
@@ -25,13 +25,16 @@
         </activity>
         <activity
             android:name=".activity.ReadActivity"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activity.WebAcitivity"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activity.ImageActivity"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.AboutActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <service
             android:name="com.umeng.update.net.DownloadingService"

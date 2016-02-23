@@ -36,12 +36,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        setupUmeng();
-
         initToolbar();
         initFragments();
         initViewPager();
         initTabLayout();
+        setupUmeng();
 
     }
 
@@ -82,6 +81,8 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent_read);
                 break;
             case R.id.action_about:
+                Intent intent_about = new Intent(this, AboutActivity.class);
+                startActivity(intent_about);
                 break;
             case R.id.action_about_me:
                 Intent intent_about_me = new Intent(this, WebAcitivity.class);

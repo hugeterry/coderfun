@@ -123,7 +123,7 @@ public class WebAcitivity extends AppCompatActivity {
                 finish();
                 break;
             case R.id.action_share:
-                ShareUtils.shareText(this, webView.getTitle() + " " + webView.getUrl());
+                ShareUtils.shareText(this, webView.getTitle() + " " + webView.getUrl()+ " 来自「趣刻」APP");
                 break;
             case R.id.action_refresh:
                 webView.reload();
