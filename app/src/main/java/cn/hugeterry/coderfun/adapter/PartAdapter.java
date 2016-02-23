@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cn.hugeterry.coderfun.R;
+import cn.hugeterry.coderfun.activity.ImageActivity;
 import cn.hugeterry.coderfun.activity.WebAcitivity;
 import cn.hugeterry.coderfun.model.beans.Results;
 import cn.hugeterry.coderfun.utils.TimeDifferenceUtils;
@@ -61,6 +62,15 @@ public class PartAdapter extends RecyclerView.Adapter<PartAdapter.PartViewHolder
                 holder.tv_author.setTextColor(Color.parseColor("#41b94d"));
                 holder.textView.setText(part_list.get(position).getDesc());
                 holder.tv_time.setText(part_list.get(position).getPublishedAt());
+                holder.view.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(context, WebAcitivity.class);
+                        intent.putExtra("url", part_list.get(position).getUrl());
+                        intent.putExtra("desc", part_list.get(position).getDesc());
+                        context.startActivity(intent);
+                    }
+                });
                 break;
             case "福利":
                 holder.draweeView.setVisibility(View.VISIBLE);
@@ -71,6 +81,15 @@ public class PartAdapter extends RecyclerView.Adapter<PartAdapter.PartViewHolder
                 holder.tv_author.setTextColor(Color.parseColor("#ffff4444"));
                 Uri uri = Uri.parse(part_list.get(position).getUrl());
                 holder.draweeView.setImageURI(uri);
+                holder.view.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(context, ImageActivity.class);
+                        intent.putExtra("url", part_list.get(position).getUrl());
+                        intent.putExtra("desc", part_list.get(position).getDesc());
+                        context.startActivity(intent);
+                    }
+                });
                 break;
             default:
                 holder.draweeView.setVisibility(View.GONE);
@@ -81,21 +100,22 @@ public class PartAdapter extends RecyclerView.Adapter<PartAdapter.PartViewHolder
                 holder.tv_author.setTextColor(Color.parseColor("#87000000"));
                 holder.tv_time.setText(part_list.get(position).getPublishedAt());
                 holder.textView.setText(part_list.get(position).getDesc());
+                holder.view.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(context, WebAcitivity.class);
+                        intent.putExtra("url", part_list.get(position).getUrl());
+                        intent.putExtra("desc", part_list.get(position).getDesc());
+                        context.startActivity(intent);
+                    }
+                });
                 break;
         }
 
         holder.tv_time.setText(TimeDifferenceUtils.getTimeDifference(
                 part_list.get(position).getPublishedAt()));
         holder.tv_type.setText(type);
-        holder.view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, WebAcitivity.class);
-                intent.putExtra("url", part_list.get(position).getUrl());
-                intent.putExtra("desc", part_list.get(position).getDesc());
-                context.startActivity(intent);
-            }
-        });
+
     }
 
     @Override

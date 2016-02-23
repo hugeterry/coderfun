@@ -1,6 +1,7 @@
 package cn.hugeterry.coderfun.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,7 @@ import java.util.List;
 
 import cn.hugeterry.coderfun.R;
 
+import cn.hugeterry.coderfun.activity.ImageActivity;
 import cn.hugeterry.coderfun.model.beans.Results;
 
 /**
@@ -45,11 +47,20 @@ public class GirlyAdapter extends RecyclerView.Adapter<GirlyAdapter.GirlyViewHol
     }
 
     @Override
-    public void onBindViewHolder(GirlyViewHolder holder, int position) {
+    public void onBindViewHolder(GirlyViewHolder holder, final int position) {
         Glide.with(context)
                 .load(girly_list.get(position).getUrl())
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(holder.imageView);
+        holder.imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(context, ImageActivity.class);
+                intent.putExtra("url",girly_list.get(position).getUrl());
+                intent.putExtra("desc",girly_list.get(position).getDesc());
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override

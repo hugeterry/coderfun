@@ -3,6 +3,12 @@
     package="cn.hugeterry.coderfun">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE">
+        <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    </uses-permission>
+
     <application
         android:name=".CoderfunApplication"
         android:allowBackup="true"
@@ -20,7 +26,19 @@
         <activity
             android:name=".activity.WebAcitivity"
             android:theme="@style/AppTheme" />
-
+        <activity
+            android:name=".activity.ImageActivity"
+            android:theme="@style/AppTheme" />
+        <service
+            android:name="com.umeng.update.net.DownloadingService"
+            android:process=":DownloadingService" >
+        </service>
+        <activity
+            android:name="com.umeng.update.UpdateDialogActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+        </activity>
+        <meta-data android:value="56cc45cc67e58e24e500334e" android:name="UMENG_APPKEY"/>
+        <meta-data android:value="Channel ID" android:name="UMENG_CHANNEL"/>
     </application>
 
 </manifest>

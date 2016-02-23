@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.raizlabs.android.dbflow.config.FlowManager;
+import com.umeng.update.UmengUpdateAgent;
 
 /**
  * Created by hugeterry(http://hugeterry.cn)
@@ -15,5 +16,7 @@ public class CoderfunApplication extends Application{
         super.onCreate();
         Fresco.initialize(this);
         FlowManager.init(this);
+        UmengUpdateAgent.update(this);
+        UmengUpdateAgent.setUpdateOnlyWifi(false);
     }
 }
