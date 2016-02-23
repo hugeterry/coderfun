@@ -13,5 +13,5 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         fresco:actualImageScaleType="fitCenter"
-        fresco:placeholderImage="@mipmap/ic_launcher" />
+        fresco:placeholderImage="@mipmap/coderfun_icon" />
 </LinearLayout>
