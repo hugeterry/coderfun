@@ -11,7 +11,6 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.hugeterry.coderfun.CoderfunKey;
 import cn.hugeterry.coderfun.R;
 import cn.hugeterry.coderfun.activity.WebAcitivity;
 import cn.hugeterry.coderfun.model.beans.Results;
