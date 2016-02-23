@@ -16,7 +16,5 @@ public class CoderfunApplication extends Application{
         super.onCreate();
         Fresco.initialize(this);
         FlowManager.init(this);
-        UmengUpdateAgent.update(this);
-        UmengUpdateAgent.setUpdateOnlyWifi(false);
     }
 }

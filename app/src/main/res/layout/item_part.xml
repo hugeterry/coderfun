@@ -4,8 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffffff"
-    android:orientation="vertical">
+    android:background="?attr/selectableItemBackground"
+    android:orientation="vertical"
+    tools:background="#ffffffff">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -52,8 +53,8 @@
             android:id="@+id/part_video_iv"
             android:layout_width="100dp"
             android:layout_height="75dp"
-            android:layout_marginLeft="10dp"
             android:layout_marginBottom="5dp"
+            android:layout_marginLeft="10dp"
             android:background="@mipmap/video_icon"
             android:visibility="gone" />
 
@@ -62,10 +63,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingLeft="10dp"
-            android:textStyle="normal"
             android:paddingRight="10dp"
             android:textColor="@color/text_primary"
             android:textSize="@dimen/item_title_textsize"
+            android:textStyle="normal"
             tools:text="AAAAAAAAAAAAAAAAAAA" />
     </LinearLayout>
 

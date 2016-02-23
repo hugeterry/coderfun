@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import com.umeng.update.UmengUpdateAgent;
+
 import java.util.ArrayList;
 
 import cn.hugeterry.coderfun.R;
@@ -33,8 +35,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        toolbar= (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        setupUmeng();
 
 //        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu);
 //        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -44,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
         initTabLayout();
 
     }
+
 
     private void initFragments() {
         mFragments = new ArrayList<>();
@@ -63,8 +67,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initTabLayout() {
-        tabLayout= (TabLayout) findViewById(R.id.tabLayout);
+        tabLayout = (TabLayout) findViewById(R.id.tabLayout);
         tabLayout.setupWithViewPager(vp);
+    }
+
+    private void setupUmeng() {
+        UmengUpdateAgent.update(this);
+        UmengUpdateAgent.setUpdateOnlyWifi(false);
+        UmengUpdateAgent.setUpdateCheckConfig(false);
     }
 
 }
