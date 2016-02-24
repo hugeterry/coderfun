@@ -35,6 +35,9 @@
         <activity
             android:name=".activity.AboutActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.OpenSourceActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <service
             android:name="com.umeng.update.net.DownloadingService"

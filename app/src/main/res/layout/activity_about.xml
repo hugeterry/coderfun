@@ -73,7 +73,12 @@
             android:layout_margin="30dp"
             android:gravity="center"
             android:text="@string/about_me" />
-
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/about_open_source_text"
+            android:onClick="intentToOpenSourceText"/>
     </LinearLayout>
 
 
