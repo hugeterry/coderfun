@@ -204,7 +204,7 @@ public class DiscoveryFragment extends Fragment {
                     @Override
                     public void onError(Throwable e) {
                         Log.e("frag", "onError: " + e.getMessage(), e);
-                        Toast.makeText(getActivity(), "网络不顺畅嘞", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "网络不顺畅嘞,更新不了数据啦", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override

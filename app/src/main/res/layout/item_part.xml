@@ -4,45 +4,85 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/selectableItemBackground"
-    android:orientation="vertical"
-    tools:background="#ffffffff">
+    android:layout_marginBottom="8dp"
+    android:background="@drawable/view_shadow"
+    android:orientation="vertical">
 
     <RelativeLayout
+        android:id="@+id/part_message"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="5dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:paddingTop="10dp">
+        android:layout_gravity="center"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp">
 
-        <TextView
-            android:id="@+id/part_tv_author"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/part_type_icon"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
             android:layout_alignParentLeft="true"
-            android:textSize="@dimen/item_text_kid_textsize"
-            tools:text="HugeTerry" />
-
+            android:layout_marginRight="5dp"
+            android:padding="3dp"
+            fresco:placeholderImage="@mipmap/coderfun_icon"
+            tools:visibility="visible" />
 
         <TextView
             android:id="@+id/part_tv_type"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="25dp"
+            android:layout_marginRight="8dp"
+            android:layout_toRightOf="@id/part_type_icon"
+            android:gravity="center"
+            android:textColor="@color/text_primary"
+            android:textSize="15sp"
+            tools:text="Android" />
+
+        <ImageView
+            android:id="@+id/part_tv_author_img"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="8dp"
+            android:layout_toRightOf="@id/part_tv_type"
+            android:padding="3dp"
+            android:src="@drawable/ic_person_black_24dp"
+            tools:text="HugeTerry" />
+
+        <TextView
+            android:id="@+id/part_tv_author"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:layout_toRightOf="@id/part_tv_author_img"
+            android:gravity="center"
+            android:textSize="@dimen/item_title_message"
+            tools:text="HugeTerry" />
+
+        <TextView
+            android:id="@+id/part_tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
             android:layout_alignParentRight="true"
-            android:background="@drawable/view_border"
-            android:textSize="13sp"
-            tools:text="Android"
-            tools:textColor="@color/colorAccent" />
+            android:gravity="center"
+            android:paddingRight="10dp"
+            android:textSize="@dimen/item_title_message"
+            tools:text="02:46" />
+
     </RelativeLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="0.3dp"
+        android:layout_below="@id/part_tv_author"
+        android:background="#20000000" />
 
     <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/part_iv"
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:paddingTop="5dp"
         android:visibility="gone"
-        fresco:placeholderImage="@mipmap/ic_launcher" />
+        fresco:placeholderImage="@mipmap/coderfun_icon"
+        tools:visibility="visible" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -53,6 +93,7 @@
             android:id="@+id/part_video_iv"
             android:layout_width="100dp"
             android:layout_height="75dp"
+            android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
             android:layout_marginLeft="10dp"
             android:background="@mipmap/video_icon"
@@ -62,29 +103,12 @@
             android:id="@+id/part_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
+            android:padding="15dp"
+            android:paddingBottom="10dp"
             android:textColor="@color/text_primary"
-            android:textSize="@dimen/item_title_textsize"
+            android:textSize="@dimen/item_text_textsize"
             android:textStyle="normal"
             tools:text="AAAAAAAAAAAAAAAAAAA" />
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/part_tv_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:layout_toRightOf="@id/part_tv_author"
-        android:paddingBottom="10dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:paddingTop="5dp"
-        android:textSize="@dimen/item_text_kid_textsize"
-        tools:text="02:46" />
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="0.3dp"
-        android:background="#d2d2d2" />
 </LinearLayout>

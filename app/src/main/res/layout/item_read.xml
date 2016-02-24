@@ -3,44 +3,51 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/selectableItemBackground"
-    android:orientation="vertical"
-    tools:background="#ffffffff">
+    android:background="#ffffff"
+    android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/read_tv"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:textColor="@color/text_primary"
-        android:textSize="@dimen/item_title_textsize"
-        tools:text="AAAAAAAAAAAAAAAAAAA" />
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp">
+        android:background="?attr/selectableItemBackground"
+        android:orientation="vertical">
 
         <TextView
-            android:id="@+id/read_tv_author"
-            android:layout_width="wrap_content"
+            android:id="@+id/read_tv"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            tools:text="HugeTerry" />
+            android:padding="10dp"
+            android:textColor="@color/text_primary"
+            android:textSize="@dimen/item_title_textsize"
+            tools:text="AAAAAAAAAAAAAAAAAAA" />
 
-        <TextView
-            android:id="@+id/read_tv_time"
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/read_tv_author"
-            android:paddingLeft="15dp"
-            tools:text="02:46" />
-    </RelativeLayout>
+            android:layout_marginBottom="10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp">
+
+            <TextView
+                android:id="@+id/read_tv_author"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                tools:text="HugeTerry" />
+
+            <TextView
+                android:id="@+id/read_tv_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/read_tv_author"
+                android:paddingLeft="15dp"
+                tools:text="02:46" />
+        </RelativeLayout>
+    </LinearLayout>
+
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginTop="10dp"
         android:background="#a7a7a7" />
 </LinearLayout>

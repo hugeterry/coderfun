@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import android.widget.RelativeLayout;
+import android.widget.Switch;
 import android.widget.TextView;
 
 
@@ -56,10 +58,9 @@ public class PartAdapter extends RecyclerView.Adapter<PartAdapter.PartViewHolder
         String type = part_list.get(position).getType();
         switch (type) {
             case "休息视频":
+                holder.relativeLayout.setVisibility(View.VISIBLE);
+                holder.draweeView.setVisibility(View.GONE);
                 holder.iv_video.setVisibility(View.VISIBLE);
-                holder.tv_time.setVisibility(View.GONE);
-                holder.tv_author.setText("看看视频，休息一下吧......");
-                holder.tv_author.setTextColor(Color.parseColor("#41b94d"));
                 holder.textView.setText(part_list.get(position).getDesc());
                 holder.view.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -72,14 +73,12 @@ public class PartAdapter extends RecyclerView.Adapter<PartAdapter.PartViewHolder
                 });
                 break;
             case "福利":
+                holder.relativeLayout.setVisibility(View.GONE);
                 holder.draweeView.setVisibility(View.VISIBLE);
                 holder.iv_video.setVisibility(View.GONE);
-                holder.textView.setVisibility(View.GONE);
-                holder.tv_time.setVisibility(View.GONE);
-                holder.tv_author.setText("瞧瞧妹纸，扩展扩展视野......");
-                holder.tv_author.setTextColor(Color.parseColor("#ffff4444"));
                 Uri uri = Uri.parse(part_list.get(position).getUrl());
                 holder.draweeView.setImageURI(uri);
+                holder.textView.setText("瞧瞧妹纸，扩展扩展视野......");
                 holder.view.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -91,13 +90,9 @@ public class PartAdapter extends RecyclerView.Adapter<PartAdapter.PartViewHolder
                 });
                 break;
             default:
+                holder.relativeLayout.setVisibility(View.VISIBLE);
                 holder.draweeView.setVisibility(View.GONE);
                 holder.iv_video.setVisibility(View.GONE);
-                holder.textView.setVisibility(View.VISIBLE);
-                holder.tv_time.setVisibility(View.VISIBLE);
-                holder.tv_author.setText(part_list.get(position).getWho());
-                holder.tv_author.setTextColor(Color.parseColor("#87000000"));
-                holder.tv_time.setText(part_list.get(position).getPublishedAt());
                 holder.textView.setText(part_list.get(position).getDesc());
                 holder.view.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -110,7 +105,24 @@ public class PartAdapter extends RecyclerView.Adapter<PartAdapter.PartViewHolder
                 });
                 break;
         }
-
+        Uri uri = null;
+        switch (part_list.get(position).getType()) {
+            case "Android":
+                uri = Uri.parse("res:///" + R.mipmap.android_icon);
+                break;
+            case "iOS":
+                uri = Uri.parse("res:///" + R.mipmap.ios_icon);
+                break;
+            case "前端":
+                uri = Uri.parse("res:///" + R.mipmap.js_icon);
+                break;
+            case "拓展资源":
+                uri = Uri.parse("res:///" + R.mipmap.other_icon);
+                break;
+        }
+        holder.dv_icon.setImageURI(uri);
+        holder.tv_author.setText(part_list.get(position).getWho());
+        holder.tv_author.setTextColor(Color.parseColor("#87000000"));
         holder.tv_time.setText(TimeDifferenceUtils.getTimeDifference(
                 part_list.get(position).getPublishedAt()));
         holder.tv_type.setText(type);
@@ -124,20 +136,24 @@ public class PartAdapter extends RecyclerView.Adapter<PartAdapter.PartViewHolder
 
     class PartViewHolder extends RecyclerView.ViewHolder {
         View view;
-        SimpleDraweeView draweeView;
+        RelativeLayout relativeLayout;
+        TextView tv_author, tv_time, tv_type;
+        SimpleDraweeView draweeView, dv_icon;
         ImageView iv_video;
         TextView textView;
-        TextView tv_author, tv_time, tv_type;
 
         public PartViewHolder(View itemView) {
             super(itemView);
             view = itemView;
+            relativeLayout = (RelativeLayout) itemView.findViewById(R.id.part_message);
+            tv_author = (TextView) itemView.findViewById(R.id.part_tv_author);
+            tv_time = (TextView) itemView.findViewById(R.id.part_tv_time);
+            dv_icon = (SimpleDraweeView) itemView.findViewById(R.id.part_type_icon);
+            tv_type = (TextView) itemView.findViewById(R.id.part_tv_type);
             draweeView = (SimpleDraweeView) itemView.findViewById(R.id.part_iv);
             iv_video = (ImageView) itemView.findViewById(R.id.part_video_iv);
             textView = (TextView) itemView.findViewById(R.id.part_tv);
-            tv_author = (TextView) itemView.findViewById(R.id.part_tv_author);
-            tv_time = (TextView) itemView.findViewById(R.id.part_tv_time);
-            tv_type = (TextView) itemView.findViewById(R.id.part_tv_type);
+
         }
     }
 }

@@ -5,6 +5,7 @@
     android:orientation="vertical"
     android:paddingLeft="2dp"
     android:paddingRight="2dp"
+    android:background="#ffffff"
     android:paddingTop="4dp">
 
     <ImageView

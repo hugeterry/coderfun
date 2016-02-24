@@ -40,30 +40,30 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
-                android:text="「趣刻」Android.APP"
+                android:text="@string/about_title_1"
                 android:textColor="@color/text_primary"
-                android:textSize="18sp" />
+                android:textSize="16sp" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="15dp"
-                android:text="每天分享几篇技术干货，一张妹纸图，一个休息视频"
+                android:text="@string/about_text_1"
                 android:textColor="@color/text_primary" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
-                android:text="数据来源"
+                android:text="@string/about_title_2"
                 android:textColor="@color/text_primary"
-                android:textSize="18sp" />
+                android:textSize="16sp" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
-                android:text="代码家的干货集中营 http://gank.io "
+                android:text="@string/about_text_2"
                 android:textColor="@color/text_primary" />
         </LinearLayout>
 
@@ -72,7 +72,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="30dp"
             android:gravity="center"
-            android:text="HugeTerry\nhttp://hugeterry.cn" />
+            android:text="@string/about_me" />
 
     </LinearLayout>
 

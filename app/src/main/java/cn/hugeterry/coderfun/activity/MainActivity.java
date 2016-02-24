@@ -80,14 +80,14 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent_read = new Intent(this, ReadActivity.class);
                 startActivity(intent_read);
                 break;
-            case R.id.action_about:
-                Intent intent_about = new Intent(this, AboutActivity.class);
-                startActivity(intent_about);
-                break;
             case R.id.action_about_me:
                 Intent intent_about_me = new Intent(this, WebAcitivity.class);
                 intent_about_me.putExtra("url", "http://www.hugeterry.cn/about");
                 startActivity(intent_about_me);
+                break;
+            case R.id.action_about:
+                Intent intent_about = new Intent(this, AboutActivity.class);
+                startActivity(intent_about);
                 break;
         }
         return super.onOptionsItemSelected(item);
