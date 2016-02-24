@@ -35,14 +35,27 @@
                 tools:text="发现更多android干货" />
         </LinearLayout>
 
-        <TextView
+        <LinearLayout
             android:id="@+id/iwantMore"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:text="more"
-            android:textColor="@color/colorAccent"
-            android:textSize="20sp" />
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="更多"
+                android:textColor="@color/colorPrimary"
+                android:textSize="18sp" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_keyboard_arrow_right_green_24dp"/>
+        </LinearLayout>
+
+
     </RelativeLayout>
 
     <TextView

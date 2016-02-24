@@ -16,7 +16,6 @@ import com.orangegangsters.github.swipyrefreshlayout.library.SwipyRefreshLayoutD
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import cn.hugeterry.coderfun.CoderfunCache;
 import cn.hugeterry.coderfun.CoderfunKey;
 import cn.hugeterry.coderfun.R;
 import cn.hugeterry.coderfun.adapter.ReadAdapter;
@@ -56,7 +55,6 @@ public class ReadFragment extends Fragment {
         super.onCreate(savedInstanceState);
         Bundle bundle = getArguments();
         mTitle = bundle.getString(ARG_TITLE);
-        CoderfunCache.isBackFromWebOrImage = false;
     }
 
     @Override

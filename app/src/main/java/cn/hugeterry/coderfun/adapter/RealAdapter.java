@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -13,6 +14,7 @@ import java.util.List;
 
 import cn.hugeterry.coderfun.CoderfunKey;
 import cn.hugeterry.coderfun.R;
+import cn.hugeterry.coderfun.activity.ReadActivity;
 import cn.hugeterry.coderfun.activity.WebAcitivity;
 import cn.hugeterry.coderfun.model.beans.Results;
 
@@ -44,27 +46,42 @@ public class RealAdapter extends RecyclerView.Adapter<RealAdapter.RealViewHolder
     }
 
     @Override
-    public void onBindViewHolder(RealViewHolder holder, final int position) {
+    public void onBindViewHolder(final RealViewHolder holder, final int position) {
         String type = real_list.get(position).get(0).getType();
         holder.title.setText(type);
         switch (type) {
             case "Android":
                 holder.title_kid.setText("探索更多Android干货");
+                intentToChangeViewpager(holder,0);
                 break;
             case "iOS":
                 holder.title_kid.setText("学习更多iOS干货");
+                intentToChangeViewpager(holder,1);
                 break;
             case "前端":
                 holder.title_kid.setText("挖掘更多前端干货");
+                intentToChangeViewpager(holder,2);
                 break;
             case "拓展资源":
                 holder.title_kid.setText("发现更多拓展资源");
+                intentToChangeViewpager(holder,3);
                 break;
         }
         setupHolderTextView(holder.t01, 0, position);
         setupHolderTextView(holder.t02, 1, position);
         setupHolderTextView(holder.t03, 2, position);
 
+    }
+
+    private void intentToChangeViewpager(RealViewHolder holder, final int num) {
+        holder.toMore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, ReadActivity.class);
+                intent.putExtra("numToSetCurrentItem", num);
+                context.startActivity(intent);
+            }
+        });
     }
 
     private void setupHolderTextView(TextView textView, final int num, final int position) {
@@ -90,14 +107,14 @@ public class RealAdapter extends RecyclerView.Adapter<RealAdapter.RealViewHolder
 
     class RealViewHolder extends RecyclerView.ViewHolder {
         TextView title, title_kid;
-        TextView toMore;
+        LinearLayout toMore;
         TextView t01, t02, t03;
 
         public RealViewHolder(View itemView) {
             super(itemView);
             title = (TextView) itemView.findViewById(R.id.tv_title);
             title_kid = (TextView) itemView.findViewById(R.id.tv_title_kid);
-            toMore = (TextView) itemView.findViewById(R.id.iwantMore);
+            toMore = (LinearLayout) itemView.findViewById(R.id.iwantMore);
             t01 = (TextView) itemView.findViewById(R.id.tv_t01);
             t02 = (TextView) itemView.findViewById(R.id.tv_t02);
             t03 = (TextView) itemView.findViewById(R.id.tv_t03);

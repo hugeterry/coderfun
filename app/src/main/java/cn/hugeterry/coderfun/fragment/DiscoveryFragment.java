@@ -121,7 +121,7 @@ public class DiscoveryFragment extends Fragment {
     }
 
     private void loadDbData() {
-        System.out.println("look:" + FRESH_GANHUO_TIME);
+        clearAdapterResults();
         switch (mTitle) {
             case "首页":
                 part_list.clear();

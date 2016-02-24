@@ -11,6 +11,7 @@ import android.view.MenuItem;
 
 import java.util.ArrayList;
 
+import cn.hugeterry.coderfun.CoderfunCache;
 import cn.hugeterry.coderfun.R;
 import cn.hugeterry.coderfun.adapter.MyPagerAdapter;
 import cn.hugeterry.coderfun.fragment.ReadFragment;
@@ -25,16 +26,19 @@ public class ReadActivity extends AppCompatActivity {
     private ViewPager vp;
     private ArrayList<Fragment> mFragments;
     private final String[] mTitles = {"Android", "iOS", "前端", "拓展资源"};
+    private int numToSetCurrentItem = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        CoderfunCache.isBackFromWebOrImage = true;
+        numToSetCurrentItem = getIntent().getIntExtra("numToSetCurrentItem", 0);
         initToolbar();
         initFragments();
         initViewPager();
         initTabLayout();
+        vp.setCurrentItem(numToSetCurrentItem);
     }
 
     private void initToolbar() {
