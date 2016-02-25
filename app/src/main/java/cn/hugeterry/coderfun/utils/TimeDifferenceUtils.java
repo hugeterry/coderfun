@@ -11,7 +11,7 @@ import java.util.Date;
  */
 public class TimeDifferenceUtils {
     public static String getTimeDifference(String time) {
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
         long diff = 0;
         try {
             Date publish_date = df.parse(time);

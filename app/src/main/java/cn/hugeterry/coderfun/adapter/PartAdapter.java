@@ -123,8 +123,12 @@ public class PartAdapter extends RecyclerView.Adapter<PartAdapter.PartViewHolder
         holder.dv_icon.setImageURI(uri);
         holder.tv_author.setText(part_list.get(position).getWho());
         holder.tv_author.setTextColor(Color.parseColor("#87000000"));
-        holder.tv_time.setText(TimeDifferenceUtils.getTimeDifference(
-                part_list.get(position).getPublishedAt()));
+        String time = part_list.get(position).getCreatedAt();
+        if (time != null) {
+            holder.tv_time.setText(TimeDifferenceUtils.getTimeDifference(time));
+        } else {
+            holder.tv_time.setText("");
+        }
         holder.tv_type.setText(type);
 
     }

@@ -53,8 +53,12 @@ public class ReadAdapter extends RecyclerView.Adapter<ReadAdapter.PartViewHolder
     public void onBindViewHolder(PartViewHolder holder, final int position) {
         holder.textView.setText(read_list.get(position).getDesc());
         holder.tv_author.setText(read_list.get(position).getWho());
-        holder.tv_time.setText(TimeDifferenceUtils.getTimeDifference(
-                read_list.get(position).getPublishedAt()));
+        String time = read_list.get(position).getCreatedAt();
+        if (time != null) {
+            holder.tv_time.setText(TimeDifferenceUtils.getTimeDifference(time));
+        } else {
+            holder.tv_time.setText("");
+        }
         holder.view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
