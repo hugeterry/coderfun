@@ -24,3 +24,6 @@
 - [@代码家](http://weibo.com/u/1628291124)和他的[干货集中营](http://gank.io)提供的数据
 - [@drakeet](http://weibo.com/drak11t)和他的[妹纸.gank.io](https://github.com/drakeet/Meizhi)
 
+## 开源协议
+
+[GPL v3](LICENSE)
