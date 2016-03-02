@@ -123,7 +123,7 @@ public class WebAcitivity extends AppCompatActivity {
                 finish();
                 break;
             case R.id.action_share:
-                ShareUtils.shareText(this, webView.getTitle() + " " + webView.getUrl()+ " 来自「趣刻」APP");
+                ShareUtils.shareText(this, webView.getTitle() + " " + webView.getUrl() + " 来自「趣刻」APP");
                 break;
             case R.id.action_refresh:
                 webView.reload();
@@ -151,5 +151,25 @@ public class WebAcitivity extends AppCompatActivity {
             }
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (webView != null) webView.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (webView != null) webView.onResume();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (webView != null) webView.destroy();
     }
 }
