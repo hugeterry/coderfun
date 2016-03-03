@@ -12,6 +12,7 @@ import android.widget.Toast;
  * Date: 16/2/22 21:39
  */
 public class BrowserUtils {
+
     public static void copyToClipBoard(Context context, String text) {
         ClipboardManager cm = (ClipboardManager) context.getSystemService(
                 Context.CLIPBOARD_SERVICE);
