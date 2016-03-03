@@ -153,8 +153,6 @@ public class WebAcitivity extends AppCompatActivity {
         return super.onKeyDown(keyCode, event);
     }
 
-
-
     @Override
     protected void onPause() {
         super.onPause();
@@ -172,4 +170,5 @@ public class WebAcitivity extends AppCompatActivity {
         super.onDestroy();
         if (webView != null) webView.destroy();
     }
+
 }
