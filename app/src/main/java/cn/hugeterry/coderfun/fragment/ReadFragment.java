@@ -74,7 +74,7 @@ public class ReadFragment extends Fragment {
 
 
     private void loadData(Boolean isTop) {
-        if (isTop == true) {
+        if (isTop) {
             NOW_PAGE_READ = 1;
         }
         getDataResults(mTitle, read_num, NOW_PAGE_READ, isTop);
@@ -136,11 +136,11 @@ public class ReadFragment extends Fragment {
 
                     @Override
                     public void onNext(DataResults dataResults) {
-                        if (dataResults.isError() == true) {
+                        if (dataResults.isError()) {
                             Toast.makeText(getActivity(), "啊擦，服务器出问题啦", Toast.LENGTH_SHORT).show();
                         } else {
 
-                            if (isTop == true) {
+                            if (isTop) {
                                 clearAdapterResults();
                             }
                             dealWithDataInRecyclerView(dataResults.getResults());

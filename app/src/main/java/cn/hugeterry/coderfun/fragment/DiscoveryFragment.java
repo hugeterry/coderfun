@@ -89,7 +89,7 @@ public class DiscoveryFragment extends Fragment {
     public void onResume() {
         super.onResume();
         loadDbData();
-        if (CoderfunCache.isBackFromWebOrImage == false) {
+        if (!CoderfunCache.isBackFromWebOrImage) {
             loadData(true);
         }
     }
@@ -98,7 +98,7 @@ public class DiscoveryFragment extends Fragment {
     private void loadData(Boolean isTop) {
         switch (mTitle) {
             case "首页":
-                if (isTop == true) {
+                if (isTop) {
                     NOW_PAGE_FI = 1;
                 }
                 getDataResults("all", fi_num, NOW_PAGE_FI, isTop);
@@ -112,7 +112,7 @@ public class DiscoveryFragment extends Fragment {
                 getDataResults("拓展资源", gh_num, NOW_PAGE_GH, isTop);
                 break;
             case "妹纸":
-                if (isTop == true) {
+                if (isTop) {
                     NOW_PAGE_MZ = 1;
                 }
                 getDataResults("福利", mz_num, NOW_PAGE_MZ, isTop);
@@ -209,7 +209,7 @@ public class DiscoveryFragment extends Fragment {
 
                     @Override
                     public void onNext(DataResults dataResults) {
-                        if (dataResults.isError() == true) {
+                        if (dataResults.isError()) {
                             Toast.makeText(getActivity(), "啊擦，服务器出问题啦", Toast.LENGTH_SHORT).show();
                         } else {
                             if (mTitle.equals("干货")) {
@@ -219,7 +219,7 @@ public class DiscoveryFragment extends Fragment {
                                 FRESH_GANHUO_TIME++;
                             }
 
-                            if (isTop == true) {
+                            if (isTop) {
                                 saveDataInDb(dataResults.getResults(), ganhuo_real_list);
                                 clearAdapterResults();
                             }
