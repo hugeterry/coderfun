@@ -1,6 +1,7 @@
 package cn.hugeterry.coderfun.fragment;
 
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -9,7 +10,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.orangegangsters.github.swipyrefreshlayout.library.SwipyRefreshLayout;
 import com.orangegangsters.github.swipyrefreshlayout.library.SwipyRefreshLayoutDirection;
@@ -204,13 +204,13 @@ public class DiscoveryFragment extends Fragment {
                     @Override
                     public void onError(Throwable e) {
                         Log.e("frag", "onError: " + e.getMessage(), e);
-                        Toast.makeText(getActivity(), "网络不顺畅嘞,更新不了数据啦", Toast.LENGTH_SHORT).show();
+                        Snackbar.make(recyclerview,"网络不顺畅嘞,更新不了数据啦",Snackbar.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void onNext(DataResults dataResults) {
                         if (dataResults.isError()) {
-                            Toast.makeText(getActivity(), "啊擦，服务器出问题啦", Toast.LENGTH_SHORT).show();
+                            Snackbar.make(recyclerview,"啊擦，服务器出问题啦",Snackbar.LENGTH_SHORT).show();
                         } else {
                             if (mTitle.equals("干货")) {
                                 ganhuo_list = new ArrayList<>();
