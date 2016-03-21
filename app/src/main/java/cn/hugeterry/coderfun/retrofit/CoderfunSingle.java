@@ -9,7 +9,7 @@ import cn.hugeterry.coderfun.model.beans.DayResults;
  */
 public class CoderfunSingle{
 
-    static CoderfunAPI CoderfunAPISingleton = null;
+   private volatile static CoderfunAPI CoderfunAPISingleton = null;
 
     public static CoderfunAPI getInstance() {
         if (CoderfunAPISingleton == null) {
