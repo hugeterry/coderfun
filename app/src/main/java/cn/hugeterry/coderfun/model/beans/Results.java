@@ -6,32 +6,58 @@ package cn.hugeterry.coderfun.model.beans;
  */
 public class Results {
     /**
-     "who": "MVP",
-     "publishedAt": "2016-02-15T03:49:24.372Z",
-     "desc": "一个轻量级的YouTube",
+     "_id": "570320ed6776596340b1d1ed",
+     "_ns": "ganhuo",
+     "createdAt": "2016-04-05T10:20:29.315Z",
+     "desc": "\u5c01\u88c5\u90a3\u4e9b\u4e8b-RecyclerView\u5c01\u88c5\u5b9e\u8df5",
+     "publishedAt": "2016-04-05T10:45:46.487Z",
+     "source": "chrome",
      "type": "Android",
-     "url": "https://github.com/theScrabi/NewPipe",
+     "url": "http://www.jianshu.com/p/a6f158d1a9c9",
      "used": true,
-     "objectId": "56c1401a71cfe4005c961746",
-     "createdAt": "2016-02-15T03:03:54.236Z",
-     "updatedAt": "2016-02-15T03:49:25.335Z"
+     "who": "AndWang"
      */
-    private String who;
-    private String publishedAt;
+    private String _id;
+    private String _ns;
+    private String createdAt;
     private String desc;
+    private String publishedAt;
+    private String source;
     private String type;
     private String url;
     private String used;
-    private String objectId;
-    private String createdAt;
-    private String updatedAt;
+    private String who;
 
-    public String getWho() {
-        return who;
+    public String get_id() {
+        return _id;
     }
 
-    public void setWho(String who) {
-        this.who = who;
+    public void set_id(String _id) {
+        this._id = _id;
+    }
+
+    public String get_ns() {
+        return _ns;
+    }
+
+    public void set_ns(String _ns) {
+        this._ns = _ns;
+    }
+
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
     }
 
     public String getPublishedAt() {
@@ -42,12 +68,12 @@ public class Results {
         this.publishedAt = publishedAt;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getSource() {
+        return source;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setSource(String source) {
+        this.source = source;
     }
 
     public String getType() {
@@ -74,27 +100,11 @@ public class Results {
         this.used = used;
     }
 
-    public String getObjectId() {
-        return objectId;
+    public String getWho() {
+        return who;
     }
 
-    public void setObjectId(String objectId) {
-        this.objectId = objectId;
-    }
-
-    public String getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(String createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public String getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(String updatedAt) {
-        this.updatedAt = updatedAt;
+    public void setWho(String who) {
+        this.who = who;
     }
 }

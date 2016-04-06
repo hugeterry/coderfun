@@ -52,7 +52,13 @@ public class ReadAdapter extends RecyclerView.Adapter<ReadAdapter.PartViewHolder
     @Override
     public void onBindViewHolder(PartViewHolder holder, final int position) {
         holder.textView.setText(read_list.get(position).getDesc());
-        holder.tv_author.setText(read_list.get(position).getWho());
+        String author = read_list.get(position).getWho();
+        if (author != null) {
+            holder.tv_author.setText(author);
+            holder.tv_author.setTextColor(Color.parseColor("#87000000"));
+        } else {
+            holder.tv_author.setText("");
+        }
         String time = read_list.get(position).getCreatedAt();
         if (time != null) {
             holder.tv_time.setText(TimeDifferenceUtils.getTimeDifference(time));

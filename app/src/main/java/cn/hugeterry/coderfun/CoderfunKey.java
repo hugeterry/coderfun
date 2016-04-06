@@ -5,7 +5,7 @@ package cn.hugeterry.coderfun;
  * Date: 16/2/22 03:20
  */
 public class CoderfunKey {
-    public static final String API_BASE_URL = "http://gank.avosapps.com/api/";
+    public static final String API_BASE_URL = "http://gank.io/api/";
     public static final int GH_NUM = 3;
     public static final int FI_NUM = 45;
     public static final int MZ_NUM = 45;

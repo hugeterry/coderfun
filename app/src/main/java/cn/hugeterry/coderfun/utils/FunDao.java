@@ -26,9 +26,8 @@ public class FunDao {
             partDbBean.type = result.getType();
             partDbBean.url = result.getUrl();
             partDbBean.used = result.getUsed();
-            partDbBean.objectId = result.getObjectId();
+            partDbBean.objectId = result.get_id();
             partDbBean.createdAt = result.getCreatedAt();
-            partDbBean.updatedAt = result.getUpdatedAt();
             partDbBean.save();
         }
 
@@ -45,9 +44,8 @@ public class FunDao {
             result.setType(partDbBeen.get(i).type);
             result.setUrl(partDbBeen.get(i).url);
             result.setUsed(partDbBeen.get(i).used);
-            result.setObjectId(partDbBeen.get(i).objectId);
+            result.set_id(partDbBeen.get(i).objectId);
             result.setCreatedAt(partDbBeen.get(i).createdAt);
-            result.setUpdatedAt(partDbBeen.get(i).updatedAt);
             results.add(result);
         }
         return results;
@@ -63,9 +61,8 @@ public class FunDao {
             girlyDbBean.type = result.getType();
             girlyDbBean.url = result.getUrl();
             girlyDbBean.used = result.getUsed();
-            girlyDbBean.objectId = result.getObjectId();
+            girlyDbBean.objectId = result.get_id();
             girlyDbBean.createdAt = result.getCreatedAt();
-            girlyDbBean.updatedAt = result.getUpdatedAt();
             girlyDbBean.save();
         }
 
@@ -85,9 +82,8 @@ public class FunDao {
                 result.setType(realDbBeen.get(k).type);
                 result.setUrl(realDbBeen.get(k).url);
                 result.setUsed(realDbBeen.get(k).used);
-                result.setObjectId(realDbBeen.get(k).objectId);
+                result.set_id(realDbBeen.get(k).objectId);
                 result.setCreatedAt(realDbBeen.get(k).createdAt);
-                result.setUpdatedAt(realDbBeen.get(k).updatedAt);
                 results.add(result);
             }
             results_list.add(results);
@@ -106,9 +102,8 @@ public class FunDao {
                 realDbBean.type = result.get(i).getType();
                 realDbBean.url = result.get(i).getUrl();
                 realDbBean.used = result.get(i).getUsed();
-                realDbBean.objectId = result.get(i).getObjectId();
+                realDbBean.objectId = result.get(i).get_id();
                 realDbBean.createdAt = result.get(i).getCreatedAt();
-                realDbBean.updatedAt = result.get(i).getUpdatedAt();
                 realDbBean.save();
             }
         }
@@ -126,9 +121,8 @@ public class FunDao {
             result.setType(girlyDbBeen.get(i).type);
             result.setUrl(girlyDbBeen.get(i).url);
             result.setUsed(girlyDbBeen.get(i).used);
-            result.setObjectId(girlyDbBeen.get(i).objectId);
+            result.set_id(girlyDbBeen.get(i).objectId);
             result.setCreatedAt(girlyDbBeen.get(i).createdAt);
-            result.setUpdatedAt(girlyDbBeen.get(i).updatedAt);
             results.add(result);
         }
         return results;

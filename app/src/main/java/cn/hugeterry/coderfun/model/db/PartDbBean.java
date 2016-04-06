@@ -33,4 +33,5 @@ public class PartDbBean extends BaseModel {
     @Column
     public String updatedAt;
 
+
 }

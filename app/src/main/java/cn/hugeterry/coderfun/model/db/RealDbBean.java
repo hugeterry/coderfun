@@ -33,4 +33,5 @@ public class RealDbBean extends BaseModel {
     @Column
     public String updatedAt;
 
+
 }
