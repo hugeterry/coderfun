@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.umeng.analytics.MobclickAgent;
 import com.umeng.update.UmengUpdateAgent;
 
 import java.util.ArrayList;
@@ -97,6 +98,16 @@ public class MainActivity extends AppCompatActivity {
         UmengUpdateAgent.update(this);
         UmengUpdateAgent.setUpdateOnlyWifi(false);
         UmengUpdateAgent.setUpdateCheckConfig(false);
+    }
+
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 
 }
