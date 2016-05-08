@@ -7,7 +7,7 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
 
     <application
@@ -24,21 +24,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".activity.ReadActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".activity.WebAcitivity"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".activity.ImageActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".activity.AboutActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".activity.OpenSourceActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".activity.ReadActivity" />
+        <activity android:name=".activity.WebAcitivity" />
+        <activity android:name=".activity.ImageActivity" />
+        <activity android:name=".activity.AboutActivity" />
+        <activity android:name=".activity.OpenSourceActivity" />
 
         <service
             android:name="com.umeng.update.net.DownloadingService"
