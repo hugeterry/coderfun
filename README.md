@@ -20,6 +20,7 @@
 - [Glide](https://github.com/bumptech/glide) 图片加载
 - `RecyclerView`实现listview以及实现瀑布流布局
 - `WebView`
+- [updatefun](https://github.com/hugeterry/UpdateDemo)自己开源的fir.im更新库
 
 ## 特别鸣谢
 

@@ -30,13 +30,6 @@
         <activity android:name=".activity.AboutActivity" />
         <activity android:name=".activity.OpenSourceActivity" />
 
-        <service
-            android:name="com.umeng.update.net.DownloadingService"
-            android:process=":DownloadingService"></service>
-        <activity
-            android:name="com.umeng.update.UpdateDialogActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"></activity>
-
         <meta-data
             android:name="UMENG_APPKEY"
             android:value="56cc45cc67e58e24e500334e" />

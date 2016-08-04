@@ -1,5 +1,7 @@
 package cn.hugeterry.coderfun.activity;
 
+import java.util.ArrayList;
+
 import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -9,16 +11,15 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.umeng.analytics.MobclickAgent;
-import com.umeng.update.UmengUpdateAgent;
 
-import java.util.ArrayList;
-
+import cn.hugeterry.coderfun.CoderfunKey;
 import cn.hugeterry.coderfun.R;
 import cn.hugeterry.coderfun.adapter.MyPagerAdapter;
 import cn.hugeterry.coderfun.fragment.DiscoveryFragment;
+import cn.hugeterry.updatefun.UpdateFunGO;
+import cn.hugeterry.updatefun.config.UpdateKey;
 
 /**
  * Created by hugeterry(http://hugeterry.cn)
@@ -37,11 +38,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         initToolbar();
         initFragments();
         initViewPager();
         initTabLayout();
-        setupUmeng();
+        setupUpdate();
 
     }
 
@@ -94,19 +96,21 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void setupUmeng() {
-        UmengUpdateAgent.update(this);
-        UmengUpdateAgent.setUpdateOnlyWifi(false);
-        UmengUpdateAgent.setUpdateCheckConfig(false);
+    private void setupUpdate() {
+        UpdateKey.API_TOKEN = CoderfunKey.API_TOKEN;
+        UpdateKey.APP_ID = CoderfunKey.APP_ID;
+        UpdateFunGO.init(this);
     }
 
     public void onResume() {
         super.onResume();
+        UpdateFunGO.onResume(this);
         MobclickAgent.onResume(this);
     }
 
     public void onPause() {
         super.onPause();
+        UpdateFunGO.onStop(this);
         MobclickAgent.onPause(this);
     }
 

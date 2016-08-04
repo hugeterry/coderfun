@@ -10,4 +10,7 @@ public class CoderfunKey {
     public static final int FI_NUM = 45;
     public static final int MZ_NUM = 45;
     public static final int READ_NUM = 20;
+
+    public static final String API_TOKEN = "";
+    public static final String APP_ID = "56cd930400fc746616000050";
 }
