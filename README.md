@@ -5,7 +5,7 @@
 数据来源[Gank.Io](http://gank.io/)<br>
 
 [豌豆荚下载](http://www.wandoujia.com/apps/cn.hugeterry.coderfun)<br>
-直接下载：https://fir.im/coderfun(https://fir.im/coderfun)<br>
+[直接下载：https://fir.im/coderfun](https://fir.im/coderfun)<br>
 欢迎使用向我修功能提建议改bug<br>
 相关文章：http://hugeterry.cn/dreams/324
 
