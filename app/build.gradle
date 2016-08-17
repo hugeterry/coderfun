@@ -49,6 +49,6 @@ dependencies {
     compile "com.github.Raizlabs.DBFlow:dbflow-core:${dbflow_version}"
     compile "com.github.Raizlabs.DBFlow:dbflow:${dbflow_version}"
 
-    compile 'cn.hugeterry.updatefun:library:1.4.0'
+    compile 'cn.hugeterry.updatefun:updatefun:1.6.6'
     compile 'com.umeng.analytics:analytics:latest.integration'
 }

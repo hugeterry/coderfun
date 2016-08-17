@@ -4,7 +4,10 @@
 每天分享几篇技术干货，一张精选妹纸图，一个有趣的休息视频，在有趣的时刻做有趣的事情<br>
 数据来源[Gank.Io](http://gank.io/)<br>
 
-直接下载：https://fir.im/coderfun<br>欢迎使用向我修功能提建议改bug<br>相关文章：http://hugeterry.cn/dreams/324
+[豌豆荚下载](http://www.wandoujia.com/apps/cn.hugeterry.coderfun)<br>
+直接下载：https://fir.im/coderfun(https://fir.im/coderfun)<br>
+欢迎使用向我修功能提建议改bug<br>
+相关文章：http://hugeterry.cn/dreams/324
 
 <img src="https://github.com/hugeterry/coderfun/blob/master/showUI%2Fcoderfun_1.jpg" width="256" />
 <img src="https://github.com/hugeterry/coderfun/blob/master/showUI%2Fcoderfun_2.jpg" width="256" />
