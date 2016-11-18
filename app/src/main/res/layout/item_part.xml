@@ -93,11 +93,12 @@
             android:id="@+id/part_video_iv"
             android:layout_width="100dp"
             android:layout_height="75dp"
-            android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
             android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
             android:background="@mipmap/video_icon"
-            android:visibility="gone" />
+            android:visibility="gone"
+            tools:visibility="visible" />
 
         <TextView
             android:id="@+id/part_tv"
