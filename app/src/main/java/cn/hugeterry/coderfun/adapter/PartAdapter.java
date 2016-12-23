@@ -82,10 +82,9 @@ public class PartAdapter extends RecyclerView.Adapter<PartAdapter.PartViewHolder
                 holder.view.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(context, ImageActivity.class);
-                        intent.putExtra("url", part_list.get(position).getUrl());
-                        intent.putExtra("desc", part_list.get(position).getDesc());
-                        context.startActivity(intent);
+                        ImageActivity.newIntent(context,
+                                part_list.get(position).getUrl(),
+                                part_list.get(position).getDesc());
                     }
                 });
                 break;

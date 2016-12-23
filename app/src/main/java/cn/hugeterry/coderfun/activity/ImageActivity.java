@@ -1,7 +1,10 @@
 package cn.hugeterry.coderfun.activity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -27,15 +30,31 @@ public class ImageActivity extends AppCompatActivity {
     private SimpleDraweeView simpleDraweeView;
     private String url, desc;
 
+    public static final String EXTRA_IMAGE_URL = "url";
+    public static final String EXTRA_IMAGE_DESC = "desc";
+
+    public static Intent newIntent(Context context, String url, String desc) {
+        Intent intent = new Intent(context, ImageActivity.class);
+        intent.putExtra(ImageActivity.EXTRA_IMAGE_URL, url);
+        intent.putExtra(ImageActivity.EXTRA_IMAGE_DESC, desc);
+        context.startActivity(intent);
+        return intent;
+    }
+
+    private void parseIntent() {
+        url = getIntent().getStringExtra(ImageActivity.EXTRA_IMAGE_URL);
+        desc = getIntent().getStringExtra(ImageActivity.EXTRA_IMAGE_DESC);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_image);
         CoderfunCache.isBackFromWebOrImage = true;
-        url = getIntent().getStringExtra("url");
-        desc = getIntent().getStringExtra("desc");
+        parseIntent();
         initToolbar();
         initSimpleDraweeView();
+//        ViewCompat.setTransitionName(simpleDraweeView, TRANSIT_PIC);
     }
 
     private void initSimpleDraweeView() {
