@@ -1,7 +1,6 @@
 package cn.hugeterry.coderfun.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
@@ -65,10 +64,9 @@ public class PartAdapter extends RecyclerView.Adapter<PartAdapter.PartViewHolder
                 holder.view.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(context, WebAcitivity.class);
-                        intent.putExtra("url", part_list.get(position).getUrl());
-                        intent.putExtra("desc", part_list.get(position).getDesc());
-                        context.startActivity(intent);
+                        WebAcitivity.newIntent(context,
+                                part_list.get(position).getUrl(),
+                                part_list.get(position).getDesc());
                     }
                 });
                 break;
@@ -96,10 +94,9 @@ public class PartAdapter extends RecyclerView.Adapter<PartAdapter.PartViewHolder
                 holder.view.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(context, WebAcitivity.class);
-                        intent.putExtra("url", part_list.get(position).getUrl());
-                        intent.putExtra("desc", part_list.get(position).getDesc());
-                        context.startActivity(intent);
+                        WebAcitivity.newIntent(context,
+                                part_list.get(position).getUrl(),
+                                part_list.get(position).getDesc());
                     }
                 });
                 break;

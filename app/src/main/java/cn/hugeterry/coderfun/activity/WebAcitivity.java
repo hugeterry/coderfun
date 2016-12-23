@@ -1,5 +1,7 @@
 package cn.hugeterry.coderfun.activity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -40,13 +42,28 @@ public class WebAcitivity extends AppCompatActivity {
     private String url;
     private String desc;
 
+    public static final String EXTRA_WEB_URL = "url";
+    public static final String EXTRA_WEB_DESC = "desc";
+
+    public static Intent newIntent(Context context, String url, String desc) {
+        Intent intent = new Intent(context, WebAcitivity.class);
+        intent.putExtra(WebAcitivity.EXTRA_WEB_URL, url);
+        intent.putExtra(WebAcitivity.EXTRA_WEB_DESC, desc);
+        context.startActivity(intent);
+        return intent;
+    }
+
+    private void parseIntent() {
+        url = getIntent().getStringExtra(WebAcitivity.EXTRA_WEB_URL);
+        desc = getIntent().getStringExtra(WebAcitivity.EXTRA_WEB_DESC);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_web);
         CoderfunCache.isBackFromWebOrImage = true;
-        url = getIntent().getStringExtra("url");
-        desc = getIntent().getStringExtra("desc");
+        parseIntent();
 
         loadingView = (FrameLayout) findViewById(R.id.loadingview);
         initToolbar();

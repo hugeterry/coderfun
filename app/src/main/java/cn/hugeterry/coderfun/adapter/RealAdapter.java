@@ -90,10 +90,9 @@ public class RealAdapter extends RecyclerView.Adapter<RealAdapter.RealViewHolder
             textView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(context, WebAcitivity.class);
-                    intent.putExtra("url", real_list.get(position).get(num).getUrl());
-                    intent.putExtra("desc", real_list.get(position).get(num).getDesc());
-                    context.startActivity(intent);
+                    WebAcitivity.newIntent(context,
+                            real_list.get(position).get(num).getUrl(),
+                            real_list.get(position).get(num).getDesc());
                 }
             });
         }

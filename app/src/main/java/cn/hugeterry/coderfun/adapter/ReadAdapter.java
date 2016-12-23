@@ -17,7 +17,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cn.hugeterry.coderfun.R;
-import cn.hugeterry.coderfun.activity.ImageActivity;
 import cn.hugeterry.coderfun.activity.WebAcitivity;
 import cn.hugeterry.coderfun.model.beans.Results;
 import cn.hugeterry.coderfun.utils.TimeDifferenceUtils;
@@ -68,10 +67,9 @@ public class ReadAdapter extends RecyclerView.Adapter<ReadAdapter.PartViewHolder
         holder.view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, WebAcitivity.class);
-                intent.putExtra("url", read_list.get(position).getUrl());
-                intent.putExtra("desc", read_list.get(position).getDesc());
-                context.startActivity(intent);
+                WebAcitivity.newIntent(context,
+                        read_list.get(position).getUrl(),
+                        read_list.get(position).getDesc());
             }
         });
     }
