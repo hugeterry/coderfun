@@ -84,9 +84,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent_read);
                 break;
             case R.id.action_about_me:
-                Intent intent_about_me = new Intent(this, WebAcitivity.class);
-                intent_about_me.putExtra("url", "http://www.hugeterry.cn/about");
-                startActivity(intent_about_me);
+                WebAcitivity.newIntent(this, "http://www.hugeterry.cn/about", "HugeTerry");
                 break;
             case R.id.action_about:
                 Intent intent_about = new Intent(this, AboutActivity.class);
