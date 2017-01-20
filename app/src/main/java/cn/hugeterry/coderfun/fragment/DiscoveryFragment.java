@@ -192,7 +192,7 @@ public class DiscoveryFragment extends Fragment {
     }
 
     private void getDataResults(final String type, int number, int page, final boolean isTop) {
-        CoderfunSingle.getInstance().getDataResults(type, number, page)
+        CoderfunSingle.getInstance(false).getDataResults(type, number, page)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<DataResults>() {
@@ -204,13 +204,13 @@ public class DiscoveryFragment extends Fragment {
                     @Override
                     public void onError(Throwable e) {
                         Log.e("frag", "onError: " + e.getMessage(), e);
-                        Snackbar.make(recyclerview,"网络不顺畅嘞,更新不了数据啦",Snackbar.LENGTH_SHORT).show();
+                        Snackbar.make(recyclerview, "网络不顺畅嘞,更新不了数据啦", Snackbar.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void onNext(DataResults dataResults) {
                         if (dataResults.isError()) {
-                            Snackbar.make(recyclerview,"啊擦，服务器出问题啦",Snackbar.LENGTH_SHORT).show();
+                            Snackbar.make(recyclerview, "啊擦，服务器出问题啦", Snackbar.LENGTH_SHORT).show();
                         } else {
                             if (mTitle.equals("干货")) {
                                 ganhuo_list = new ArrayList<>();

@@ -1,6 +1,14 @@
 package cn.hugeterry.coderfun.retrofit;
 
+import android.util.Log;
+
+import java.io.File;
+import java.util.concurrent.TimeUnit;
+
+import cn.hugeterry.coderfun.CoderfunApplication;
 import cn.hugeterry.coderfun.CoderfunKey;
+import cn.hugeterry.coderfun.utils.CacheStrategyInterceptor;
+import okhttp3.Cache;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
@@ -11,7 +19,30 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Date: 16/2/15 21:37
  */
 public class CoderfunRetrofit {
-    private static OkHttpClient httpClient = new OkHttpClient();
+
+    private static OkHttpClient httpClient;
+
+    private OkHttpClient createHttpClient(boolean isCache) {
+        Log.i("cache", "isCache:" + isCache);
+        if (isCache) {
+            File httpCacheDirectory = new File(CoderfunApplication.getAppContext().getExternalCacheDir().getAbsolutePath(), "responses");
+            Cache cache = new Cache(httpCacheDirectory, 10 * 1024 * 1024);
+            CacheStrategyInterceptor cacheStrategyInterceptor = new CacheStrategyInterceptor();
+            Log.i("cache", "true");
+            httpClient = new OkHttpClient
+                    .Builder()
+                    .cache(cache)
+                    .addInterceptor(cacheStrategyInterceptor)
+                    .addNetworkInterceptor(cacheStrategyInterceptor)
+                    .retryOnConnectionFailure(true)
+                    .connectTimeout(15, TimeUnit.SECONDS)
+                    .build();
+        } else {
+            httpClient = new OkHttpClient();
+            Log.i("cache", "false");
+        }
+        return httpClient;
+    }
 
     private static Retrofit.Builder builder =
             new Retrofit.Builder()
@@ -19,8 +50,8 @@ public class CoderfunRetrofit {
                     .addConverterFactory(GsonConverterFactory.create())
                     .addCallAdapterFactory(RxJavaCallAdapterFactory.create());
 
-    public <S> S createService(Class<S> serviceClass) {
-        Retrofit retrofit = builder.client(httpClient).build();
+    public <S> S createService(Class<S> serviceClass, boolean isCache) {
+        Retrofit retrofit = builder.client(createHttpClient(isCache)).build();
         return retrofit.create(serviceClass);
     }
 }

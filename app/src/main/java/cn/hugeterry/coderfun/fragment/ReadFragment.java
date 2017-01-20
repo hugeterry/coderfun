@@ -119,7 +119,7 @@ public class ReadFragment extends Fragment {
     }
 
     private void getDataResults(final String type, int number, int page, final boolean isTop) {
-        CoderfunSingle.getInstance().getDataResults(type, number, page)
+        CoderfunSingle.getInstance(true).getDataResults(type, number, page)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<DataResults>() {
