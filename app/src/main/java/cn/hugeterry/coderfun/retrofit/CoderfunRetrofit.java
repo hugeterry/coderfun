@@ -1,12 +1,10 @@
 package cn.hugeterry.coderfun.retrofit;
 
-import com.squareup.okhttp.OkHttpClient;
-
 import cn.hugeterry.coderfun.CoderfunKey;
-import retrofit.GsonConverterFactory;
-import retrofit.Retrofit;
-import retrofit.RxJavaCallAdapterFactory;
-
+import okhttp3.OkHttpClient;
+import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Created by hugeterry(http://hugeterry.cn)

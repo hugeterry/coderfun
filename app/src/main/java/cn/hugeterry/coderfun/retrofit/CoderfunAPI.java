@@ -2,8 +2,9 @@ package cn.hugeterry.coderfun.retrofit;
 
 import cn.hugeterry.coderfun.model.beans.DataResults;
 import cn.hugeterry.coderfun.model.beans.DayResults;
-import retrofit.http.GET;
-import retrofit.http.Path;
+
+import retrofit2.http.GET;
+import retrofit2.http.Path;
 import rx.Observable;
 
 /**
