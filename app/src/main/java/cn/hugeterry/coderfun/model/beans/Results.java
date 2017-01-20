@@ -1,26 +1,32 @@
 package cn.hugeterry.coderfun.model.beans;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by hugeterry(http://hugeterry.cn)
  * Date: 16/2/15 19:29
  */
 public class Results {
     /**
-     "_id": "570320ed6776596340b1d1ed",
-     "_ns": "ganhuo",
-     "createdAt": "2016-04-05T10:20:29.315Z",
-     "desc": "\u5c01\u88c5\u90a3\u4e9b\u4e8b-RecyclerView\u5c01\u88c5\u5b9e\u8df5",
-     "publishedAt": "2016-04-05T10:45:46.487Z",
-     "source": "chrome",
-     "type": "Android",
-     "url": "http://www.jianshu.com/p/a6f158d1a9c9",
-     "used": true,
-     "who": "AndWang"
+     * "_id": "5872f952421aa9315ea7991f",
+     * "createdAt": "2017-01-09T10:45:38.791Z",
+     * "desc": "\u7c7b Instagram \u7684\u8272\u5f69\u6e10\u53d8\u6548\u679c\u3002",
+     * "images": [
+     * "http://img.gank.io/404bcd23-6d5c-440d-b985-ddf85b171239"
+     * ],
+     * "publishedAt": "2017-01-09T11:46:59.821Z",
+     * "source": "chrome",
+     * "type": "Android",
+     * "url": "https://github.com/Taishi-Y/InstagramLikeColorTransitionAndroid",
+     * "used": true,
+     * "who": "\u4ee3\u7801\u5bb6"
      */
     private String _id;
     private String _ns;
     private String createdAt;
     private String desc;
+    private List<String> images = new ArrayList<>();
     private String publishedAt;
     private String source;
     private String type;
@@ -58,6 +64,14 @@ public class Results {
 
     public void setDesc(String desc) {
         this.desc = desc;
+    }
+
+    public List<String> getImages() {
+        return images;
+    }
+
+    public void setImages(List<String> images) {
+        this.images = images;
     }
 
     public String getPublishedAt() {

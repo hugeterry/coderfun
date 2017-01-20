@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.ArrayList;
@@ -50,13 +52,25 @@ public class ReadAdapter extends RecyclerView.Adapter<ReadAdapter.PartViewHolder
 
     @Override
     public void onBindViewHolder(PartViewHolder holder, final int position) {
+        List<String> images = read_list.get(position).getImages();
+        if (!images.isEmpty()) {
+            holder.iv_img.setVisibility(View.VISIBLE);
+            Glide.with(context)
+                    .load(images.get(0))
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .override(100, 100)
+                    .thumbnail(0.5f)
+                    .into(holder.iv_img);
+        } else {
+            holder.iv_img.setVisibility(View.GONE);
+        }
         holder.textView.setText(read_list.get(position).getDesc());
         String author = read_list.get(position).getWho();
         if (author != null) {
             holder.tv_author.setText(author);
             holder.tv_author.setTextColor(Color.parseColor("#87000000"));
         } else {
-            holder.tv_author.setText("");
+            holder.tv_author.setText("匿名");
         }
         String time = read_list.get(position).getCreatedAt();
         if (time != null) {
@@ -83,6 +97,7 @@ public class ReadAdapter extends RecyclerView.Adapter<ReadAdapter.PartViewHolder
         View view;
         TextView textView;
         TextView tv_author, tv_time;
+        ImageView iv_img;
 
         public PartViewHolder(View itemView) {
             super(itemView);
@@ -90,6 +105,7 @@ public class ReadAdapter extends RecyclerView.Adapter<ReadAdapter.PartViewHolder
             textView = (TextView) itemView.findViewById(R.id.read_tv);
             tv_author = (TextView) itemView.findViewById(R.id.read_tv_author);
             tv_time = (TextView) itemView.findViewById(R.id.read_tv_time);
+            iv_img = (ImageView) itemView.findViewById(R.id.read_iv_img);
         }
     }
 }

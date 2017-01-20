@@ -120,7 +120,7 @@ public class PartAdapter extends RecyclerView.Adapter<PartAdapter.PartViewHolder
             holder.tv_author.setText(author);
             holder.tv_author.setTextColor(Color.parseColor("#87000000"));
         } else {
-            holder.tv_author.setText("");
+            holder.tv_author.setText("匿名");
         }
         String time = part_list.get(position).getCreatedAt();
         if (time != null) {
