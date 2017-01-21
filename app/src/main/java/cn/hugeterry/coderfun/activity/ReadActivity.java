@@ -7,6 +7,8 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.Window;
+import android.view.WindowManager;
 
 import com.umeng.analytics.MobclickAgent;
 
@@ -32,7 +34,10 @@ public class ReadActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams. FLAG_FULLSCREEN ,
+                WindowManager.LayoutParams. FLAG_FULLSCREEN);
+        setContentView(R.layout.activity_read);
         CoderfunCache.isBackFromWebOrImage = true;
         numToSetCurrentItem = getIntent().getIntExtra("numToSetCurrentItem", 0);
         initToolbar();
@@ -47,7 +52,7 @@ public class ReadActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_arrow_white_24dp);
-        getSupportActionBar().setTitle("分类阅读");
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
     }
 
     private void initFragments() {
