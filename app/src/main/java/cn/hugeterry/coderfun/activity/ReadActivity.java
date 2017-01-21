@@ -6,9 +6,12 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageView;
 
 import com.umeng.analytics.MobclickAgent;
 
@@ -26,6 +29,7 @@ import cn.hugeterry.coderfun.fragment.ReadFragment;
 public class ReadActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private TabLayout tabLayout;
+    private ImageView imageView;
     private ViewPager vp;
     private ArrayList<Fragment> mFragments;
     private final String[] mTitles = {"Android", "iOS", "前端", "拓展资源"};
@@ -35,8 +39,8 @@ public class ReadActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams. FLAG_FULLSCREEN ,
-                WindowManager.LayoutParams. FLAG_FULLSCREEN);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_read);
         CoderfunCache.isBackFromWebOrImage = true;
         numToSetCurrentItem = getIntent().getIntExtra("numToSetCurrentItem", 0);
@@ -44,6 +48,38 @@ public class ReadActivity extends AppCompatActivity {
         initFragments();
         initViewPager();
         initTabLayout();
+
+        imageView = (ImageView) findViewById(R.id.iv_header);
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                Log.i("tabLayout", "" + tab.getPosition());
+                switch (tab.getPosition()) {
+                    case 0:
+                        imageView.setImageResource(R.mipmap.bg_android);
+                        break;
+                    case 1:
+                        imageView.setImageResource(R.mipmap.bg_ios);
+                        break;
+                    case 2:
+                        imageView.setImageResource(R.mipmap.bg_js);
+                        break;
+                    case 3:
+                        imageView.setImageResource(R.mipmap.bg_other);
+                        break;
+                }
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
         vp.setCurrentItem(numToSetCurrentItem);
     }
 
