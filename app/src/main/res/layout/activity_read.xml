@@ -42,6 +42,7 @@
 
             <android.support.design.widget.TabLayout
                 android:id="@+id/tabLayout"
+                style="@style/TabLayoutStyle"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:layout_gravity="bottom" />
