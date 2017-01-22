@@ -1,6 +1,7 @@
 package cn.hugeterry.coderfun.activity;
 
 import android.os.Bundle;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -27,6 +28,7 @@ import cn.hugeterry.coderfun.fragment.ReadFragment;
  * Date: 16/2/23 21:53
  */
 public class ReadActivity extends AppCompatActivity {
+    private CollapsingToolbarLayout collapsingToolbarLayout;
     private Toolbar toolbar;
     private TabLayout tabLayout;
     private ImageView imageView;
@@ -47,6 +49,7 @@ public class ReadActivity extends AppCompatActivity {
         initToolbar();
         initFragments();
         initViewPager();
+        setupCollapsingToolbar();
         initTabLayout();
 
         imageView = (ImageView) findViewById(R.id.iv_header);
@@ -88,7 +91,7 @@ public class ReadActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_arrow_white_24dp);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setTitle("分类阅读");
     }
 
     private void initFragments() {
@@ -102,6 +105,11 @@ public class ReadActivity extends AppCompatActivity {
         vp = (ViewPager) findViewById(R.id.vp);
         vp.setOffscreenPageLimit(4);
         vp.setAdapter(new MyPagerAdapter(getSupportFragmentManager(), mFragments, mTitles));
+    }
+
+    private void setupCollapsingToolbar() {
+        collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsingToolbarLayout);
+        collapsingToolbarLayout.setTitleEnabled(false);
     }
 
     private void initTabLayout() {

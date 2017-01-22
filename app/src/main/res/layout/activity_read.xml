@@ -14,7 +14,7 @@
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
         <android.support.design.widget.CollapsingToolbarLayout
-            android:id="@+id/toolbar_layout"
+            android:id="@+id/collapsingToolbarLayout"
             android:layout_width="match_parent"
             android:layout_height="250dp"
             android:fitsSystemWindows="true"
@@ -25,9 +25,9 @@
                 android:id="@+id/iv_header"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="@mipmap/bg_android"
                 android:fitsSystemWindows="true"
                 android:scaleType="centerCrop"
-                android:background="@mipmap/bg_android"
                 app:layout_collapseMode="parallax" />
 
             <android.support.v7.widget.Toolbar
