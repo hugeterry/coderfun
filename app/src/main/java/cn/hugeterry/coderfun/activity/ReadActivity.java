@@ -28,7 +28,6 @@ import cn.hugeterry.coderfun.fragment.ReadFragment;
  * Date: 16/2/23 21:53
  */
 public class ReadActivity extends AppCompatActivity {
-    private CollapsingToolbarLayout collapsingToolbarLayout;
     private Toolbar toolbar;
     private TabLayout tabLayout;
     private ImageView imageView;
@@ -49,7 +48,6 @@ public class ReadActivity extends AppCompatActivity {
         initToolbar();
         initFragments();
         initViewPager();
-        setupCollapsingToolbarLayout();
         initTabLayout();
 
         vp.setCurrentItem(numToSetCurrentItem);
@@ -76,15 +74,10 @@ public class ReadActivity extends AppCompatActivity {
         vp.setAdapter(new MyPagerAdapter(getSupportFragmentManager(), mFragments, mTitles));
     }
 
-    private void setupCollapsingToolbarLayout() {
-        collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsingToolbarLayout);
-        collapsingToolbarLayout.setTitleEnabled(false);
-        imageView = (ImageView) findViewById(R.id.iv_header);
-    }
-
     private void initTabLayout() {
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
         tabLayout.setupWithViewPager(vp);
+        imageView = (ImageView) findViewById(R.id.iv_header);
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
