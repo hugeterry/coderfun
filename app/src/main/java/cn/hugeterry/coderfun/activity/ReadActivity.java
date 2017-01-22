@@ -83,7 +83,6 @@ public class ReadActivity extends AppCompatActivity {
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                Log.i("tabLayout", "" + tab.getPosition());
                 imageView.startAnimation(AnimationUtils.loadAnimation(ReadActivity.this, R.anim.anim_dismiss));
                 switch (tab.getPosition()) {
                     case 0:
