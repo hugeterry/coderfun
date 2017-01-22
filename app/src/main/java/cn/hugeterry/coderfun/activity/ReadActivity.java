@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
 import com.umeng.analytics.MobclickAgent;
@@ -83,6 +84,7 @@ public class ReadActivity extends AppCompatActivity {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 Log.i("tabLayout", "" + tab.getPosition());
+                imageView.startAnimation(AnimationUtils.loadAnimation(ReadActivity.this, R.anim.anim_dismiss));
                 switch (tab.getPosition()) {
                     case 0:
                         imageView.setImageResource(R.mipmap.bg_android);
@@ -97,6 +99,7 @@ public class ReadActivity extends AppCompatActivity {
                         imageView.setImageResource(R.mipmap.bg_other);
                         break;
                 }
+                imageView.setAnimation(AnimationUtils.loadAnimation(ReadActivity.this, R.anim.anim_show));
             }
 
             @Override
