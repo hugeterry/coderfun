@@ -49,10 +49,43 @@ public class ReadActivity extends AppCompatActivity {
         initToolbar();
         initFragments();
         initViewPager();
-        setupCollapsingToolbar();
+        setupCollapsingToolbarLayout();
         initTabLayout();
 
+        vp.setCurrentItem(numToSetCurrentItem);
+    }
+
+    private void initToolbar() {
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_arrow_white_24dp);
+        getSupportActionBar().setTitle("分类阅读");
+    }
+
+    private void initFragments() {
+        mFragments = new ArrayList<>();
+        for (String title : mTitles) {
+            mFragments.add(ReadFragment.getInstance(title));
+        }
+    }
+
+    private void initViewPager() {
+        vp = (ViewPager) findViewById(R.id.vp);
+        vp.setOffscreenPageLimit(4);
+        vp.setAdapter(new MyPagerAdapter(getSupportFragmentManager(), mFragments, mTitles));
+    }
+
+    private void setupCollapsingToolbarLayout() {
+        collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsingToolbarLayout);
+        collapsingToolbarLayout.setTitleEnabled(false);
         imageView = (ImageView) findViewById(R.id.iv_header);
+    }
+
+    private void initTabLayout() {
+        tabLayout = (TabLayout) findViewById(R.id.tabLayout);
+        tabLayout.setupWithViewPager(vp);
+
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
@@ -83,38 +116,6 @@ public class ReadActivity extends AppCompatActivity {
 
             }
         });
-        vp.setCurrentItem(numToSetCurrentItem);
-    }
-
-    private void initToolbar() {
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_arrow_white_24dp);
-        getSupportActionBar().setTitle("分类阅读");
-    }
-
-    private void initFragments() {
-        mFragments = new ArrayList<>();
-        for (String title : mTitles) {
-            mFragments.add(ReadFragment.getInstance(title));
-        }
-    }
-
-    private void initViewPager() {
-        vp = (ViewPager) findViewById(R.id.vp);
-        vp.setOffscreenPageLimit(4);
-        vp.setAdapter(new MyPagerAdapter(getSupportFragmentManager(), mFragments, mTitles));
-    }
-
-    private void setupCollapsingToolbar() {
-        collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsingToolbarLayout);
-        collapsingToolbarLayout.setTitleEnabled(false);
-    }
-
-    private void initTabLayout() {
-        tabLayout = (TabLayout) findViewById(R.id.tabLayout);
-        tabLayout.setupWithViewPager(vp);
     }
 
     @Override
