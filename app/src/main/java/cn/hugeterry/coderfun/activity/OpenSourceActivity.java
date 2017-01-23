@@ -3,15 +3,11 @@ package cn.hugeterry.coderfun.activity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
 
 import com.umeng.analytics.MobclickAgent;
 
-import cn.hugeterry.coderfun.BuildConfig;
 import cn.hugeterry.coderfun.R;
-import cn.hugeterry.coderfun.utils.ShareUtils;
 
 /**
  * Created by hugeterry(http://hugeterry.cn)
