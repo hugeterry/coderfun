@@ -78,7 +78,6 @@ public class ReadFragment extends Fragment {
             NOW_PAGE_READ = 1;
         }
         getDataResults(mTitle, read_num, NOW_PAGE_READ, isTop);
-
     }
 
     private void initSwipyRefreshLayout(View v) {
