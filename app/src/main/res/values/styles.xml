@@ -1,5 +1,4 @@
 <resources>
-
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
@@ -17,6 +16,7 @@
     <style name="TabLayoutStyle" parent="Widget.Design.TabLayout">
         <item name="tabTextAppearance">@style/TabTextAppearence</item>
     </style>
+
     <style name="TabTextAppearence" parent="TextAppearance.Design.Tab">
         <item name="textAllCaps">false</item>
     </style>
