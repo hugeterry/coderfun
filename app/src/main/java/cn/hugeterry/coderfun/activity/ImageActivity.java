@@ -53,7 +53,6 @@ public class ImageActivity extends AppCompatActivity {
         parseIntent();
         initToolbar();
         initSimpleDraweeView();
-//        ViewCompat.setTransitionName(simpleDraweeView, TRANSIT_PIC);
     }
 
     private void initSimpleDraweeView() {
