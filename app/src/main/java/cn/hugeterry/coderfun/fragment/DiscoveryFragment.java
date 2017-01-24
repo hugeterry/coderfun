@@ -59,7 +59,6 @@ public class DiscoveryFragment extends Fragment {
     private List<List<Results>> ganhuo_real_list = new ArrayList<>();
     private List<Results> girly_list = new ArrayList<>();
 
-
     public static DiscoveryFragment getInstance(String title) {
         DiscoveryFragment fra = new DiscoveryFragment();
         Bundle bundle = new Bundle();
