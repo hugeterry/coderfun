@@ -3,7 +3,7 @@
     <string name="about_title_1">「趣刻」Android.APP</string>
     <string name="about_text_1">每天分享几篇技术干货，一张妹纸图，一个休息视频</string>
     <string name="about_title_2">特别鸣谢</string>
-    <string name="about_text_2">代码家的干货集中营 http://gank.io 提供数据\ndrakeet的 妹纸&amp;gank.io</string>
+    <string name="about_text_2">代码家的干货集中营 http://gank.io 提供数据</string>
     <string name="about_me">开发与设计: HugeTerry\nhttp://hugeterry.cn</string>
     <string name="about_open_source">retrofit2\nfresco\nDBFlow\nglide\ncom.android.support:appcompat-v7:23.1.1\ncom.android.support:design:23.1.1\ncom.android.support:recyclerview-v7:23.1.1\ncom.wang.avi:library:1.0.2\ncom.nineoldandroids:library:2.4.0\nio.reactivex:rxandroid:1.1.0</string>
     <string name="about_open_source_text">开源许可</string>

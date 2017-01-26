@@ -11,24 +11,20 @@ public class CoderfunSingle {
 
     public static CoderfunAPI getInstance(boolean isCache) {
         if (isCache) {
-            if (CoderfunIsCacheAPI == null) {
-                synchronized (CoderfunSingle.class) {
-                    if (CoderfunIsCacheAPI == null) {
-                        CoderfunIsCacheAPI = new CoderfunRetrofit().createService(CoderfunAPI.class, true);
-                    }
-                }
-            }
-            return CoderfunIsCacheAPI;
+            return getCoderfunAPI(true, CoderfunIsCacheAPI);
         } else {
-            if (CoderfunNoCacheAPI == null) {
-                synchronized (CoderfunSingle.class) {
-                    if (CoderfunNoCacheAPI == null) {
-                        CoderfunNoCacheAPI = new CoderfunRetrofit().createService(CoderfunAPI.class, false);
-                    }
-                }
-            }
-            return CoderfunNoCacheAPI;
+            return getCoderfunAPI(false, CoderfunNoCacheAPI);
         }
     }
 
+    private static CoderfunAPI getCoderfunAPI(boolean isCache, CoderfunAPI coderfunAPI) {
+        if (coderfunAPI == null) {
+            synchronized (CoderfunSingle.class) {
+                if (coderfunAPI == null) {
+                    coderfunAPI = new CoderfunRetrofit().createService(CoderfunAPI.class, isCache);
+                }
+            }
+        }
+        return coderfunAPI;
+    }
 }
