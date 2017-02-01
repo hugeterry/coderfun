@@ -24,6 +24,7 @@
 - `RecyclerView`实现listview以及实现瀑布流布局
 - `WebView`
 - [updatefun](https://github.com/hugeterry/UpdateDemo)自己开源的fir.im更新库
+- [CoordinatorTabLayout](https://github.com/hugeterry/CoordinatorTabLayout)自己开源的CoordinatorTabLayout控件库
 
 ## 特别鸣谢
 

@@ -20,16 +20,16 @@ import cn.hugeterry.coderfun.CoderfunCache;
 import cn.hugeterry.coderfun.R;
 import cn.hugeterry.coderfun.adapter.MyPagerAdapter;
 import cn.hugeterry.coderfun.fragment.ReadFragment;
+import cn.hugeterry.coordinatortablayout.CoordinatorTabLayout;
 
 /**
  * Created by hugeterry(http://hugeterry.cn)
  * Date: 16/2/23 21:53
  */
 public class ReadActivity extends AppCompatActivity {
-    private Toolbar toolbar;
-    private TabLayout tabLayout;
-    private ImageView imageView;
+    private CoordinatorTabLayout mCoordinatorTabLayout;
     private ViewPager vp;
+    private int[] mImageArray, mColorArray;
     private ArrayList<Fragment> mFragments;
     private final String[] mTitles = {"Android", "iOS", "前端", "拓展资源"};
     private int numToSetCurrentItem = 0;
@@ -43,21 +43,27 @@ public class ReadActivity extends AppCompatActivity {
         setContentView(R.layout.activity_read);
         CoderfunCache.isBackFromWebOrImage = true;
         numToSetCurrentItem = getIntent().getIntExtra("numToSetCurrentItem", 0);
-        initToolbar();
+
         initFragments();
         initViewPager();
-        initTabLayout();
+        mImageArray = new int[]{R.mipmap.bg_android,
+                R.mipmap.bg_ios,
+                R.mipmap.bg_js,
+                R.mipmap.bg_other};
+        mColorArray = new int[]{android.R.color.holo_blue_light,
+                android.R.color.holo_red_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_green_light};
+
+        mCoordinatorTabLayout = (CoordinatorTabLayout) findViewById(R.id.coordinatortablayout);
+        mCoordinatorTabLayout.setTitle("分类阅读")
+                .setBackEnable(true)
+                .setImageArray(mImageArray, mColorArray)
+                .setupWithViewPager(vp);
 
         vp.setCurrentItem(numToSetCurrentItem);
     }
 
-    private void initToolbar() {
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_arrow_white_24dp);
-        getSupportActionBar().setTitle("分类阅读");
-    }
 
     private void initFragments() {
         mFragments = new ArrayList<>();
@@ -72,41 +78,6 @@ public class ReadActivity extends AppCompatActivity {
         vp.setAdapter(new MyPagerAdapter(getSupportFragmentManager(), mFragments, mTitles));
     }
 
-    private void initTabLayout() {
-        tabLayout = (TabLayout) findViewById(R.id.tabLayout);
-        tabLayout.setupWithViewPager(vp);
-        imageView = (ImageView) findViewById(R.id.iv_header);
-
-        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                imageView.startAnimation(AnimationUtils.loadAnimation(ReadActivity.this, R.anim.anim_dismiss));
-                switch (tab.getPosition()) {
-                    case 0:
-                        imageView.setImageResource(R.mipmap.bg_android);
-                        break;
-                    case 1:
-                        imageView.setImageResource(R.mipmap.bg_ios);
-                        break;
-                    case 2:
-                        imageView.setImageResource(R.mipmap.bg_js);
-                        break;
-                    case 3:
-                        imageView.setImageResource(R.mipmap.bg_other);
-                        break;
-                }
-                imageView.setAnimation(AnimationUtils.loadAnimation(ReadActivity.this, R.anim.anim_show));
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-            }
-        });
-    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
