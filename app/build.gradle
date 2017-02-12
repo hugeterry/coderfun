@@ -48,7 +48,7 @@ dependencies {
     compile "com.github.Raizlabs.DBFlow:dbflow-core:${dbflow_version}"
     compile "com.github.Raizlabs.DBFlow:dbflow:${dbflow_version}"
 
-    compile 'cn.hugeterry.coordinatortablayout:coordinatortablayout:1.0.5'
+    compile 'cn.hugeterry.coordinatortablayout:coordinatortablayout:1.0.6'
     compile 'cn.hugeterry.updatefun:updatefun:1.8.8'
     compile 'com.umeng.analytics:analytics:latest.integration'
 }
