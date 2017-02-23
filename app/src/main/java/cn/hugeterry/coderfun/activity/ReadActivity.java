@@ -87,12 +87,14 @@ public class ReadActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void onResume() {
+    @Override
+    protected void onResume() {
         super.onResume();
         MobclickAgent.onResume(this);
     }
 
-    public void onPause() {
+    @Override
+    protected void onPause() {
         super.onPause();
         MobclickAgent.onPause(this);
     }

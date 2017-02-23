@@ -100,13 +100,15 @@ public class MainActivity extends AppCompatActivity {
         UpdateFunGO.init(this);
     }
 
-    public void onResume() {
+    @Override
+    protected void onResume() {
         super.onResume();
         UpdateFunGO.onResume(this);
         MobclickAgent.onResume(this);
     }
 
-    public void onPause() {
+    @Override
+    protected void onPause() {
         super.onPause();
         UpdateFunGO.onStop(this);
         MobclickAgent.onPause(this);
