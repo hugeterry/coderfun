@@ -9,11 +9,8 @@
 欢迎使用向我修功能提建议改bug<br>
 相关文章：http://hugeterry.cn/dreams/324
 
-<img src="showUI/coderfun_1.jpg" width="256" />
-<img src="showUI/coderfun_2.jpg" width="256" />
-<img src="showUI/coderfun_3.jpg" width="256" /><br>
-<img src="showUI/coderfun_4.jpg" width="256" />
-<img src="showUI/coderfun_5.jpg" width="256" /><br>
+<img src="showUI/coderfun_1.jpg" width="256" /> <img src="showUI/coderfun_2.jpg" width="256" /> <img src="showUI/coderfun_3.jpg" width="256" /><br>
+<img src="showUI/coderfun_4.jpg" width="256" /> <img src="showUI/coderfun_5.jpg" width="256" /><br>
 
 #### 主要运用
 - `Material Design`
