@@ -5,7 +5,6 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -92,8 +91,6 @@ public class ReadFragment extends Fragment {
         swipyRefreshLayout.setOnRefreshListener(new SwipyRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh(SwipyRefreshLayoutDirection direction) {
-                Log.d("MainActivity", "Refresh triggered at "
-                        + (direction == SwipyRefreshLayoutDirection.TOP ? "top" : "bottom"));
                 Observable.timer(2, TimeUnit.SECONDS)
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(new Action1<Long>() {
@@ -124,12 +121,10 @@ public class ReadFragment extends Fragment {
                 .subscribe(new Subscriber<DataResults>() {
                     @Override
                     public void onCompleted() {
-                        Log.i("frag", "onCompleted: ");
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.e("frag", "onError: " + e.getMessage(), e);
                         Snackbar.make(recyclerview, "网络不顺畅嘞,更新不了数据啦", Snackbar.LENGTH_SHORT).show();
                     }
 

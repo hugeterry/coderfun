@@ -1,7 +1,5 @@
 package cn.hugeterry.coderfun.retrofit;
 
-import android.util.Log;
-
 import java.io.File;
 import java.util.concurrent.TimeUnit;
 
@@ -23,12 +21,10 @@ public class CoderfunRetrofit {
     private static OkHttpClient httpClient;
 
     private OkHttpClient createHttpClient(boolean isCache) {
-        Log.i("cache", "isCache:" + isCache);
         if (isCache) {
             File httpCacheDirectory = new File(CoderfunApplication.getAppContext().getExternalCacheDir().getAbsolutePath(), "responses");
             Cache cache = new Cache(httpCacheDirectory, 10 * 1024 * 1024);
             CacheStrategyInterceptor cacheStrategyInterceptor = new CacheStrategyInterceptor();
-            Log.i("cache", "true");
             httpClient = new OkHttpClient
                     .Builder()
                     .cache(cache)
@@ -39,7 +35,6 @@ public class CoderfunRetrofit {
                     .build();
         } else {
             httpClient = new OkHttpClient();
-            Log.i("cache", "false");
         }
         return httpClient;
     }
