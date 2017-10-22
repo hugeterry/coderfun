@@ -37,9 +37,6 @@ public class ReadActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_read);
         CoderfunCache.isBackFromWebOrImage = true;
         numToSetCurrentItem = getIntent().getIntExtra("numToSetCurrentItem", 0);
@@ -56,7 +53,8 @@ public class ReadActivity extends AppCompatActivity {
                 android.R.color.holo_green_light};
 
         mCoordinatorTabLayout = (CoordinatorTabLayout) findViewById(R.id.coordinatortablayout);
-        mCoordinatorTabLayout.setTitle("分类阅读")
+        mCoordinatorTabLayout.setTranslucentStatusBar(this)
+                .setTitle("分类阅读")
                 .setBackEnable(true)
                 .setImageArray(mImageArray, mColorArray)
                 .setupWithViewPager(vp);
