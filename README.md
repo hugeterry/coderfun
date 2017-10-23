@@ -1,6 +1,6 @@
 # 趣刻 Android APP
 
-该项目使用了RxJava & Retrofit & DBFlow进行开发，同时也调用了自己开源的[CoordinatorTabLayout](https://github.com/hugeterry/CoordinatorTabLayout) 和 [updatefun](https://github.com/hugeterry/UpdateDemo)进行开发<br>
+该项目使用了RxJava & Retrofit & DBFlow进行开发，同时调用自己开源的[CoordinatorTabLayout](https://github.com/hugeterry/CoordinatorTabLayout) 和 [updatefun](https://github.com/hugeterry/UpdateDemo)<br>
 数据的存储使用了两种方式，主页采用DBFlow第三方数据库进行存储，阅读页采用 Retrofit+okhttp 缓存进行存储<br>
 
 16年1月的寒假闲下来学习知识点向大神们学习的一个项目<br>
